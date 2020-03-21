@@ -6,7 +6,7 @@ const Dashboard = () => {
 
   return (
     <Stage>
-      Dashboard
+      //Settings
     </Stage>
   )
 }

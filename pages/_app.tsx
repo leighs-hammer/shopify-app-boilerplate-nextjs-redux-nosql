@@ -3,7 +3,7 @@ import React from 'react'
 import {Provider} from 'react-redux'
 import App from 'next/app'
 import withRedux from 'next-redux-wrapper'
-
+import qs from 'query-string'
 
 // Polaris
 import enTranslations from '@shopify/polaris/locales/en.json'
@@ -34,7 +34,7 @@ class MyApp extends App {
       <Provider store={store}>
         <AppProvider 
           i18n={enTranslations}
-          linkComponent={CustomLink} 
+          linkComponent={CustomLink}
         >
           <Component {...pageProps} />
         </AppProvider>
