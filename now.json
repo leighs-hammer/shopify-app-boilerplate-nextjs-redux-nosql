@@ -9,8 +9,10 @@
   "routes": [
     {
       "src": "/.*",
-      "headers": { "X-Frame-Options": "SAMEORIGIN" },
+      "headers": { 
+        "Content-Security-Policy": "frame-ancestors https://*.myshopify.com" 
+      },
       "continue": true
-    },
+    }
   ]
 }

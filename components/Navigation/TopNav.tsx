@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
 type TNavType =  string
-type TqueryType = string
 
 interface IFRQuery {
     type?: string
