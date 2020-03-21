@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev src/app",
-    "build": "next build src/app",
-    "start": "next start src/app",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "ngrok": "ngrok http 3000"
   },
   "dependencies": {

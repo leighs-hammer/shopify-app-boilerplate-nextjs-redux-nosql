@@ -1,0 +1,8 @@
+{
+  "env": {
+    "APP_URL": "@app_url_boilerplate",
+    "SHOPIFY_API_KEY": "@shopify_api_key_boilerplate",
+    "SHOPIFY_APP_SECRET": "@shopify_app_secret_boilerplate",
+    "SHOPIFY_APP_SCOPES": "@shopify_app_scopes_boilerplate"
+  }
+}
