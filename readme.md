@@ -1,4 +1,4 @@
-# Shopify App Boilerplat
+# Shopify App Boilerplate
 
 using Nexjs + typescrip and designed to be deployed to now.sh, tied in with redux. 
 For database access it usese firestore, although you could path this out for any cloud nosql. 
