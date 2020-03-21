@@ -6,7 +6,7 @@ For database access it usese firestore, although you could path this out for any
 
 ## PreSetup 
 1. clone
-2. `npm run deploy`
+2. `npm run install` or yarn of you prefer
 
 ## Setup
 1. create an app in your partners.shopify.com dashboard (optionally create a production app as well)
