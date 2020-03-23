@@ -4,7 +4,22 @@
     "APP_URL": "@app_url_boilerplate",
     "SHOPIFY_API_KEY": "@shopify_api_key_boilerplate",
     "SHOPIFY_APP_SECRET": "@shopify_app_secret_boilerplate",
-    "SHOPIFY_APP_SCOPES": "@shopify_app_scopes_boilerplate"
+    "SHOPIFY_APP_SCOPES": "@shopify_app_scopes_boilerplate",
+
+    "APP_NAME_KEY": "@app_name_key_boilerplate",
+
+    "FIREBASE_SERVICE_ACCOUNT": "@firebase_service_account_boilerplate",
+
+    "FIREBASE_API_KEY": "@firebase_api_key_boilerplate",
+    "FIREBASE_AUTH_DOMAIN": "@firebase_auth_domain_boilerplate",
+    "FIREBASE_DATABASE_URL": "@firebase_database_url_boilerplate",
+    "FIREBASE_PROJECT_ID": "@firebase_project_id_boilerplate",
+    "FIREBASE_STORAGE_BUCKET":"@firebase_storage_bucket_boilerplate",
+    "FIREBASE_MESSAGING_SENDER_ID":"@firebase_messaging_sender_id_boilerplate",
+    "FIREBASE_APP_ID":"@firebase_app_id_boilerplate",
+    "FIREBASE_MEASUREMENT_ID":"@firebase_measurement_id_boilerplate",
+    "FIREBASE_CLIENT_EMAIL":"@firebase_client_email_boilerplate",
+    "FIREBASE_PRIVATE_KEY": "@firebase_private_key_boilerplate"
   },
   "routes": [
     {

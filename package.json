@@ -13,6 +13,7 @@
     "@shopify/polaris": "^4.16.1",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
+    "firebase-admin": "^8.10.0",
     "immer": "^6.0.2",
     "immer-combine-reducers": "^1.0.1",
     "next": "9.3.1",

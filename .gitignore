@@ -30,3 +30,6 @@ yarn-error.log*
 # Firebase
 .runtimeconfig.json
 service-account.json
+
+##
+/_config/firebaseConfig.ts
