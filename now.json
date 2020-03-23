@@ -10,6 +10,8 @@
 
     "FIREBASE_SERVICE_ACCOUNT": "@firebase_service_account_boilerplate",
 
+    "MONGO_DB_CONNECTION_STRING": "@mongo_db_connection_string_boilerplate",
+
     "FIREBASE_API_KEY": "@firebase_api_key_boilerplate",
     "FIREBASE_AUTH_DOMAIN": "@firebase_auth_domain_boilerplate",
     "FIREBASE_DATABASE_URL": "@firebase_database_url_boilerplate",
