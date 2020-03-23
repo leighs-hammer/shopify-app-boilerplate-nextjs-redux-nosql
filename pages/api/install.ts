@@ -22,35 +22,35 @@ export default async (req, res) => {
   //   return res.status(429).json({message:'Unauthorized: Shop'})
   // }
 
-  const db = admin.firestore()
+  // const db = admin.firestore()
 
-  const dbRef = await db.collection(process.env.APP_NAME_KEY).doc('TEST-STORE-2')
+  // const dbRef = await db.collection(process.env.APP_NAME_KEY).doc('TEST-STORE-2')
 
-  let responseData
+  // let responseData
 
-  try {
-    const snapshot = await dbRef.get()
+  // try {
+  //   const snapshot = await dbRef.get()
 
-    if(!snapshot.exists) {
-      const appDBref = await db.collection(process.env.APP_NAME_KEY).doc('TEST-STORE-3').set(installInitialData())
-      // Generate shopify token
-      console.log('dosnt exist')
-      responseData = await dbRef.onSnapshot(data => data)
-    } else {
-      responseData = await dbRef.onSnapshot(data => data)
-    }
+  //   if(!snapshot.exists) {
+  //     const appDBref = await db.collection(process.env.APP_NAME_KEY).doc('TEST-STORE-3').set(installInitialData())
+  //     // Generate shopify token
+  //     console.log('dosnt exist')
+  //     responseData = await dbRef.get().onSnapshot(data => data)
+  //   } else {
+  //     responseData = await snapshot.onSnapshot(data => data)
+  //   }
     
 
 
-  } catch (error) {
+  // } catch (error) {
 
-  }
+  // }
 
-  console.log(responseData)
+  // console.log(responseData)
 
 
   return res.status(200).json({
-    body: responseData,
+    body: {},
   });
 }
 
