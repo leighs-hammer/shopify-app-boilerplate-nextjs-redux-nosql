@@ -1,12 +1,14 @@
-# Shopify App Boilerplat
+# Shopify App Boilerplate
 
-using Nexjs + typescrip and designed to be deployed to now.sh, tied in with redux. 
+using Nexjs + typescript and designed to be deployed to now.sh, tied in with redux. 
 For database access it usese firestore, although you could path this out for any cloud nosql. 
+The pattern is a hooks first approach to data provisions, surfaced at the page levels serving as HOCs. 
+Redux is used for persisting stat accroas reloads and the usual nested components, it does have its draw backs but at present is the best choice for this handling.  
 
 
 ## PreSetup 
 1. clone
-2. `npm run deploy`
+2. `npm run install` or yarn of you prefer
 
 ## Setup
 1. create an app in your partners.shopify.com dashboard (optionally create a production app as well)
