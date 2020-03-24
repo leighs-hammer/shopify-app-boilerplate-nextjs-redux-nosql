@@ -1,6 +1,6 @@
 import {MongoClient} from 'mongodb'
 import shopifyMethods from '../../_utils/shopifyMethods'
-import { listDatabases, createListing, findOneListingById } from '../../_utils/atlasMethods';
+import { listDatabases, createStoreDocument, findOneStoreDocumentById } from '../../_utils/atlasMethods';
 
 import installInitialDataMongo from '../../_config/installInitialDataMongo';
 
@@ -37,7 +37,7 @@ export default async (req, res) => {
     await client.connect();
     
     // Get the doc or create
-    const storeDocument = await findOneListingById(client, shop)
+    const storeDocument = await findOneStoreDocumentById(client, shop)
       
     if(storeDocument) {
       // store exists return early
@@ -45,49 +45,55 @@ export default async (req, res) => {
         body: {...storeDocument},
       })
 
-    } else {
-      // shopify token exchange
-      if(!code) {
-        return res.status(404).json({
-          error: true,
-          message: 'code is missing'
-        })
+    } 
 
-      }
-
-      const token = await shopifyMethods.exchangeToken(shop,
-        {
-          client_id: process.env.SHOPIFY_API_KEY,
-          client_secret: process.env.SHOPIFY_APP_SECRET,
-          code
-        })
-
-      if(!token) {
-        return res.status(429).json({
-          error: true,
-          message: 'Something has gone wrong exchanging shopify trroken'
-        })
-      }
-
-      await createListing(client,installInitialDataMongo(shop, token))
-  
-      const newStore = await findOneListingById(client, shop)
-  
-      if(newStore) {
-        return res.status(200).json({
-          body: {...newStore},
-        })
-      }
+    // shopify token exchange
+    if(!code) {
+      return res.status(404).json({
+        error: true,
+        message: 'code is missing'
+      })
 
     }
+
+    // shopify token
+    const token = await shopifyMethods.exchangeToken(shop,
+      {
+        client_id: process.env.SHOPIFY_API_KEY,
+        client_secret: process.env.SHOPIFY_APP_SECRET,
+        code
+      })
+
+    if(!token) {
+      return res.status(429).json({
+        error: true,
+        message: 'Something has gone wrong exchanging shopify trroken'
+      })
+    }
+
+    // create db listing
+    await createStoreDocument(client,installInitialDataMongo(shop, token))
+
+    const newStore = await findOneStoreDocumentById(client, shop)
+
+    if(newStore) {
+      return res.status(200).json({
+        body: {...newStore},
+      })
+    }
+
     
   } catch (e) {
+    
     console.error(e);
     return res.status(500).json({
       body: {error:true, message: e.message},
     })
+
   } finally {
-    await client.close();
+    
+    await client.close()
+  
   }
 
 }

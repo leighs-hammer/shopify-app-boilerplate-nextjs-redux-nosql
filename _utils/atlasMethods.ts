@@ -10,14 +10,14 @@ export const listDatabases = async (client) => {
 }
 
 
-export const createListing = async (client, newListing) => {
+export const createStoreDocument = async (client, newListing) => {
   const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).insertOne(newListing);
   console.log(`New listing created with the following id: ${result.insertedId}`);
 
 }
 
 
-export const createMultipleListings = async (client, newListings) => {
+export const createMultipleStoreDocuments = async (client, newListings) => {
   const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).insertMany(newListings);
 
   console.log(`${result.insertedCount} new listing(s) created with the following id(s):`);
@@ -25,7 +25,7 @@ export const createMultipleListings = async (client, newListings) => {
 
 }
 
-export const findOneListingById = async (client, idOfListing) => {
+export const findOneStoreDocumentById = async (client, idOfListing) => {
 
   const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).findOne({ _id: idOfListing });
 
@@ -43,9 +43,9 @@ export const findOneListingById = async (client, idOfListing) => {
 // Index
 const atlasMethods = {
   listDatabases,
-  createListing,
-  createMultipleListings,
-  findOneListingById,
+  createStoreDocument,
+  createMultipleStoreDocuments,
+  findOneStoreDocumentById,
 }
 
 export default atlasMethods
