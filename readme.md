@@ -36,7 +36,11 @@ Locally it will use your .env
     "APP_URL": "@app_url_boilerplate",
     "SHOPIFY_API_KEY": "@shopify_api_key_boilerplate",
     "SHOPIFY_APP_SECRET": "@shopify_app_secret_boilerplate",
-    "SHOPIFY_APP_SCOPES": "@shopify_app_scopes_boilerplate"
+    "SHOPIFY_APP_SCOPES": "@shopify_app_scopes_boilerplate",
+
+    "APP_NAME_KEY": "@app_name_key_boilerplate",
+    "MONGO_DB_CONNECTION_STRING": "@mongo_db_connection_string_boilerplate"
+
   },
   "routes": [
     {
