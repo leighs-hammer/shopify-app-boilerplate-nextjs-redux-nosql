@@ -10,7 +10,8 @@
     "lint": "eslint  ./**/*.ts",
     "lint:fix": "eslint --fix  ./**/*.ts ",
     "test:ci": "node tools/tests",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@shopify/app-bridge": "^1.20.0",
@@ -34,15 +35,17 @@
     "uuid": "^7.0.2"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-typescript": "^7.9.0",
     "@types/node": "^13.9.2",
     "@types/react": "^16.9.25",
-    "jest": "^25.1.0",
-    "typescript": "^3.8.3",
-    "ngrok": "^3.2.7",
+    "babel-eslint": "^10.1.0",
+    "cross-env": "^5.2.0",
     "eslint": "^6.8.0",
     "eslint-plugin-jest": "^23.8.2",
     "eslint-plugin-react": "^7.19.0",
-    "cross-env": "^5.2.0",
-    "babel-eslint": "^10.1.0"
+    "jest": "^25.1.0",
+    "ngrok": "^3.2.7",
+    "typescript": "^3.8.3"
   }
 }

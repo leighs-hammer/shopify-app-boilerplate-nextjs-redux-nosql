@@ -1,5 +1,5 @@
 
-type dbValues = 'atlas' | 'firebase'
+type dbValues = 'atlas'
 
 interface IFappConfig {
   db: dbValues,
