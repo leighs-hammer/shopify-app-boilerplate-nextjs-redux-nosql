@@ -1,4 +1,5 @@
 # Shopify App Boilerplate
+![Units](https://github.com/leighs-hammer/shopify-app-boilerplate-nextjs-redux-nosql/workflows/Units/badge.svg)
 
 uses Nexjs + typescript and designed to be deployed to now.sh, tied in with redux. 
 For database mongodb atlas is used as an example, but you could pipe in any DB you choose. 
