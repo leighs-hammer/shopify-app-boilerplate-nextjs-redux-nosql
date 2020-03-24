@@ -7,8 +7,10 @@ interface IFappConfig {
   dbRoot: string,
 }
 
+
+
 const appConfig: IFappConfig = {
-  db: 'atlas',
+  db: 'atlas', // optional flag if you are gonna add a database type
   dbName: 'boilerplate',
   dbRoot: 'stores'
 }

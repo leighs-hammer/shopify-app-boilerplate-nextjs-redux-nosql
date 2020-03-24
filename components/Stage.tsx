@@ -8,6 +8,7 @@ import useRouterSync from '../hooks/useRouterSync'
 
 import LoadingBar from './global/LoadingBar'
 import TopNav from './Navigation/TopNav'
+import useInstall from '../hooks/useShopData'
 
 
 
@@ -17,6 +18,9 @@ const Stage = ({ children }) => {
   // Syncronizes the shopify navigation with the app current path
   const syncTheRoute = useRouterSync()
 
+  // install or set 
+  const install = useInstall()
+  // 
   // If unauthorized
   // return redirect
   // 

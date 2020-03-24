@@ -6,14 +6,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "ngrok": "ngrok http 3000"
+    "ngrok": "ngrok http 3000",
+    "lint": "eslint  ./**/*.ts",
+    "lint:fix": "eslint --fix  ./**/*.ts ",
+    "test:ci": "node tools/tests",
+    "test": "jest"
   },
   "dependencies": {
     "@shopify/app-bridge": "^1.20.0",
     "@shopify/polaris": "^4.16.1",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
-    "firebase-admin": "^8.10.0",
     "immer": "^6.0.2",
     "immer-combine-reducers": "^1.0.1",
     "mongodb": "^3.5.5",
@@ -26,13 +29,19 @@
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
-    "shopify-hmac-validation": "^0.1.7"
+    "shopify-hmac-validation": "^0.1.7",
+    "uuid": "^7.0.2"
   },
   "devDependencies": {
     "@types/node": "^13.9.2",
     "@types/react": "^16.9.25",
     "jest": "^25.1.0",
     "typescript": "^3.8.3",
-    "ngrok": "^3.2.7"
+    "ngrok": "^3.2.7",
+    "eslint": "^6.8.0",
+    "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-react": "^7.19.0",
+    "cross-env": "^5.2.0",
+    "babel-eslint": "^10.1.0"
   }
 }

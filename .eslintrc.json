@@ -1,0 +1,58 @@
+{
+  "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true,
+    "jest/globals": true
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+        "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "parser": "babel-eslint",
+  "plugins": [
+    "react",
+    "jest"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "no-extra-semi": "error",
+    "no-dupe-keys": "error",
+    "no-dupe-args": "error",
+    "no-debugger" : "error",
+    "no-duplicate-case" : "error",
+    "no-console" : [1, { "allow": ["warn", "error", "info"] }],
+    "no-undefined": "error",
+    "quotes" : ["error", "single"],
+    "camelcase": 1,
+    "max-params": ["error", 5],
+    "no-unused-vars": "warn",
+    "indent": ["error", 2, {"SwitchCase": 1, "ignoredNodes": ["TemplateLiteral"]}],
+    "no-empty": "error",
+    "no-use-before-define": "error",
+    "prefer-const": "error",
+    "no-unreachable": "error",
+    "valid-typeof": "error",
+    "eqeqeq": "error",
+    "no-var": "error",
+    "keyword-spacing": ["warn", { "overrides": {
+      "if": { "before": true, "after": false },
+      "for": {  "before": false, "after": true },
+      "while": { "before": false, "after": true },
+      "from": {"before": true, "after": true },
+      "as": {"before": true, "after": true }
+    }}]
+  }
+}
