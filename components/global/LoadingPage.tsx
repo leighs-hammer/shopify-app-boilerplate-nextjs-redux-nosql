@@ -1,4 +1,5 @@
 import React from 'react'
+import colorSet from '../../_constants/colorSets'
 
 const LoadingPage = () => {
 
@@ -6,7 +7,7 @@ const LoadingPage = () => {
     <div className="loadingWrapper">
       <span className="loadingCenterSpace">
         <img className="triangle" src="/triangle.svg" alt="" />
-        <span>LOADING</span>
+        <span className="loadingText">LOADING</span>
         
       </span>
       <style jsx>
@@ -16,7 +17,7 @@ const LoadingPage = () => {
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: linear-gradient(144deg, #333, #222 48%, #111);
+            background-image: linear-gradient(144deg, ${colorSet.indigo.Lighter}, ${colorSet.indigo.Lighter} 48%,  ${colorSet.indigo.Lighter});
           }
           .loadingCenterSpace {
             font-weight: bold;
@@ -26,10 +27,14 @@ const LoadingPage = () => {
             align-items: center;
             flex-direction: column;
           }
+          .loadingText {
+            color: ${colorSet.indigo.Text};
+          }
           .triangle {
             width: 120px;
             height: auto;
             margin: 30px;
+            opacity: 0.6;
             animation: rotation 5s infinite linear;
           }
 
