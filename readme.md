@@ -1,7 +1,7 @@
 # Shopify App Boilerplate
 
 using Nexjs + typescript and designed to be deployed to now.sh, tied in with redux. 
-For database access it usese firestore, although you could path this out for any cloud nosql. 
+For database access mongodb atlas as an example, but you could pipe in any DB you choose. 
 The pattern is a hooks first approach to data provisions, surfaced at the page levels serving as HOCs. 
 Redux is used for persisting stat accroas reloads and the usual nested components, it does have its draw backs but at present is the best choice for this handling.  
 
@@ -63,4 +63,4 @@ The system is pretty much a nextjs app with polaris and some api function `/page
 - Polaris : polaris.shopify.com
 - Redux: https://redux.js.org/introduction/getting-started/
 - Immer: https://github.com/immerjs/immer
-- firebase / firestore: https://console.firebase.google.com/
+- mongoDb / Atlas: https://cloud.mongodb.com/
