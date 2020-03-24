@@ -24,25 +24,35 @@ export const createMultipleStoreDocuments = async (client, document) => {
 
 }
 
-export const findOneStoreDocumentById = async (client, idOfListing) => {
+export const findOneStoreDocumentById = async (client, id) => {
 
-  const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).findOne({ _id: idOfListing });
+  const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).findOne({ _id: id });
   if(result) {
-    console.log(`Found a listing in the collection with the name '${idOfListing}':`);
+    console.log(`Found a listing in the collection with the name '${id}':`);
     return result
   } else {
-    console.error(`No listings found with the name '${idOfListing}'`)
+    console.error(`No listings found with the name '${id}'`)
     return false
   }
+}
+
+export const getStoreTokenById = async (client, id) => {
+  const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).findOne({ _id: id })
+  if(result) {
+    const {shopifyApiToken, callAuthenticityKey} = result 
+    return {shopifyApiToken, callAuthenticityKey}
+  }
+  return false
 }
 
 
 // Index
 const atlasMethods = {
-  listDatabases,
   createStoreDocument,
   createMultipleStoreDocuments,
   findOneStoreDocumentById,
+  getStoreTokenById,
+  listDatabases,
 }
 
 export default atlasMethods

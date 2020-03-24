@@ -1,14 +1,19 @@
 import React from 'react'
 import Stage from '../components/Stage'
+import { Card } from '@shopify/polaris'
 
 
-const Dashboard = () => {
+const Settings = () => {
 
   return (
     <Stage>
-      Settings
+      <Card sectioned 
+        title="settings"
+      >
+        <p>Place holder for the settings content!</p>
+      </Card>
     </Stage>
   )
 }
 
-export default Dashboard
+export default Settings

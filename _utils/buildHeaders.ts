@@ -1,4 +1,4 @@
-const buildHeaders = (token: string) => token ? ({
+const buildHeaders = (token?: string) => token ? ({
   'X-Shopify-Access-Token': token,
   'Content-Type': 'application/json',
   'Accept': 'application/lson'

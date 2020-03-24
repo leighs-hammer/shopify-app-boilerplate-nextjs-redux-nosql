@@ -16,3 +16,4 @@ const appConfig: IFappConfig = {
 }
 
 export default appConfig
+
