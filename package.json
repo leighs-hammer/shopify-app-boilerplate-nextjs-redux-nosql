@@ -11,7 +11,10 @@
     "lint:fix": "eslint --fix  ./**/*.ts ",
     "test:ci": "node tools/tests",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "test:units": "jest test/.*.unit.test.*",
+    "test:units:github-actions": "jest test/.*.unit.test.*"
+
   },
   "dependencies": {
     "@shopify/app-bridge": "^1.20.0",

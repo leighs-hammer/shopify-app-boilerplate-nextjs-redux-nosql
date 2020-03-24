@@ -1,0 +1,18 @@
+# Add 'label1' to any changes within 'example' folder or any subfolders
+api:
+  - /pages/api/**/*
+
+redux:
+- /_store/**/*
+
+appConfig: 
+- /_config/**/*
+
+components: 
+- /components/**/*
+
+hooks: 
+- /hooks/**/*
+
+public: 
+- /public/**/*
