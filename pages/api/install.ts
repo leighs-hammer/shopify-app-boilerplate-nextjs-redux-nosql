@@ -42,7 +42,7 @@ export default async (req, res) => {
     if(storeDocument) {
       // store exists return early
       return res.status(200).json({
-        body: {...storeDocument},
+        body: {callAuthenticityKey : storeDocument.callAuthenticityKey},
       })
 
     } 
@@ -73,12 +73,13 @@ export default async (req, res) => {
 
     // create db listing
     await createStoreDocument(client,installInitialDataMongo(shop, token))
+    // optionally create any other placeholders
 
     const newStore = await findOneStoreDocumentById(client, shop)
 
     if(newStore) {
       return res.status(200).json({
-        body: {...newStore},
+        body: {callAuthenticityKey: newStore.callAuthenticityKey},
       })
     }
 
@@ -91,9 +92,7 @@ export default async (req, res) => {
     })
 
   } finally {
-    
     await client.close()
-  
   }
 
 }

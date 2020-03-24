@@ -1,14 +1,15 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import colorSet from '../_constants/colorSets'
 import {Page} from '@shopify/polaris' 
 
 import Head from 'next/head'
+
 import useShopDomain from '../hooks/usehShopDomain'
 import useRouterSync from '../hooks/useRouterSync'
+import useInstall from '../hooks/useShopData'
 
 import LoadingBar from './global/LoadingBar'
 import TopNav from './Navigation/TopNav'
-import useInstall from '../hooks/useShopData'
 
 
 
@@ -17,13 +18,8 @@ const Stage = ({ children }) => {
   const [domain] = useShopDomain()
   // Syncronizes the shopify navigation with the app current path
   const syncTheRoute = useRouterSync()
-
-  // install or set 
+  // install or set call key
   const install = useInstall()
-  // 
-  // If unauthorized
-  // return redirect
-  // 
 
   return (
     <React.Fragment>

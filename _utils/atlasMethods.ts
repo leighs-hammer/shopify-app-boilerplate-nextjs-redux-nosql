@@ -10,26 +10,23 @@ export const listDatabases = async (client) => {
 }
 
 
-export const createStoreDocument = async (client, newListing) => {
-  const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).insertOne(newListing);
+export const createStoreDocument = async (client, document) => {
+  const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).insertOne(document);
   console.log(`New listing created with the following id: ${result.insertedId}`);
-
+  return document.callAuthenticityKey
 }
 
 
-export const createMultipleStoreDocuments = async (client, newListings) => {
-  const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).insertMany(newListings);
+export const createMultipleStoreDocuments = async (client, document) => {
+  const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).insertMany(document);
 
   console.log(`${result.insertedCount} new listing(s) created with the following id(s):`);
-  console.log(result.insertedIds);
 
 }
 
 export const findOneStoreDocumentById = async (client, idOfListing) => {
 
   const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).findOne({ _id: idOfListing });
-
-  console.log(result)
   if(result) {
     console.log(`Found a listing in the collection with the name '${idOfListing}':`);
     return result

@@ -4,13 +4,12 @@ import {Provider} from 'react-redux'
 import App from 'next/app'
 import withRedux from 'next-redux-wrapper'
 import qs from 'query-string'
-
-// Polaris
-import enTranslations from '@shopify/polaris/locales/en.json'
-import {AppProvider} from '@shopify/polaris'
-import '@shopify/polaris/styles.css'
-import CustomLink from '../components/CustomLink'
 import { initializeStore } from '../_store/store'
+
+import AppBridgeProvider from '../components/AppBridgeProvider'
+import '@shopify/polaris/styles.css'
+import PolarisProvider from '../components/PolarisProvider'
+
 // import InstallProvider from '../components/InstallProvider'
 
 class MyApp extends App {
@@ -32,12 +31,11 @@ class MyApp extends App {
 
     return (
       <Provider store={store}>
-        <AppProvider 
-          i18n={enTranslations}
-          linkComponent={CustomLink}
-        >
-          <Component {...pageProps} />
-        </AppProvider>
+        <PolarisProvider>
+          <AppBridgeProvider>
+            <Component {...pageProps} />
+          </AppBridgeProvider>
+        </PolarisProvider>
       </Provider>
     );
   }
