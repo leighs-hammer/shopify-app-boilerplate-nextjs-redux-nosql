@@ -1,4 +1,4 @@
-import { dataShaper } from "./dataShapeProducts"
+import { dataShaper } from './dataShapeProducts'
 
 const dataShapeOrders: dataShaper = (response) => {
 
