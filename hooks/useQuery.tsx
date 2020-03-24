@@ -3,14 +3,14 @@ import {useSelector} from 'react-redux'
 import Axios from 'axios'
 import merge from 'deepmerge'
 
-interface IFPageOptions {
+export interface IFPageOptions {
   shaper?: (resonse: any) => any,
   pageOptions?: {
     key?: string,
   }
 }
 
-interface IFUseQuery {
+ interface IFUseQuery {
   query: string
   variables: any
   options: IFPageOptions

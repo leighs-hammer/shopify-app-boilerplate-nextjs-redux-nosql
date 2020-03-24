@@ -4,6 +4,7 @@ import qs from 'query-string'
 import Axios from 'axios';
 import CONSTANTS from '../_constants';
 
+
 const useInstall = () => {
 
   const dispatch = useDispatch()
@@ -11,6 +12,7 @@ const useInstall = () => {
   const callAuthenticityKey = useSelector(state => state.app.callAuthenticityKey)
   const [callKey, setCallKey] = useState('')
   const [first, setFirst] = useState(true)
+
 
   const installOrData = async (code) => {
     
