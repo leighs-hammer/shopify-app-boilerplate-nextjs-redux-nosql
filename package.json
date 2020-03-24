@@ -12,8 +12,8 @@
     "test:ci": "node tools/tests",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:units": "jest test/.*.unit.test.*",
-    "test:units:github-actions": "jest test/.*.unit.test.*"
+    "test:units": "jest *.unit.test.*",
+    "test:units:github-actions": "jest *.unit.test.*"
 
   },
   "dependencies": {
