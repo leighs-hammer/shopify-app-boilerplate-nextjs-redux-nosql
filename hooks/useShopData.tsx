@@ -21,7 +21,7 @@ const useInstall = () => {
     try {
       const response = await Axios.post('api/install', {shop: permanentDomain, code})
       if(response.data.body.callAuthenticityKey){
-        dispatch({type: CONSTANTS.INSTALL_SET_DATA, payload: {callAuthenticityKey: response.data.body.callAuthenticityKey}})
+        dispatch({type: CONSTANTS.INSTALL_SET_DATA, payload: {...response.data.body}})
         setCallKey(response.data.body.callAuthenticityKey)
         return response.data.body.callAuthenticityKey
       }
@@ -35,8 +35,9 @@ const useInstall = () => {
     
     if(typeof window !== 'undefined' && window.location) {
       const query = qs.parse(window.location.search)
-      if(first && permanentDomain && query.code) {
-        installOrData(query.code)
+      const {code} = query
+      if(first && permanentDomain) {
+        installOrData(code)
       }
     }
 

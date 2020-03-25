@@ -24,6 +24,6 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx", "tests/utils/dataShapeOrders.unit.test.js", "tests/utils/buildGqlEndpoint.unit.test.js"
   ]
 }

@@ -5,6 +5,12 @@ const installInitialDataMongo = (shop, token) => ({
   shopifyApiToken: token,
   shopifyApiTokenError: false,
   callAuthenticityKey: uuidv4(),
+  billing: {
+    tier: 'free',
+    active: true,
+    trialStarted: Date.now(),
+    history: []
+  },
 })
 
 export default installInitialDataMongo

@@ -4,7 +4,7 @@ import {Page} from '@shopify/polaris'
 
 import Head from 'next/head'
 
-import useShopDomain from '../hooks/usehShopDomain'
+import useShopDomain from '../hooks/useShopDomain'
 import useRouterSync from '../hooks/useRouterSync'
 import useInstall from '../hooks/useShopData'
 

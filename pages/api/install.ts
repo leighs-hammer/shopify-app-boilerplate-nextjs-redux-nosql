@@ -42,7 +42,7 @@ export default async (req, res) => {
     if(storeDocument) {
       // store exists return early
       return res.status(200).json({
-        body: {callAuthenticityKey : storeDocument.callAuthenticityKey},
+        body: {callAuthenticityKey : storeDocument.callAuthenticityKey, billing: storeDocument.billing},
       })
 
     } 
@@ -79,7 +79,7 @@ export default async (req, res) => {
 
     if(newStore) {
       return res.status(200).json({
-        body: {callAuthenticityKey: newStore.callAuthenticityKey},
+        body: {callAuthenticityKey: newStore.callAuthenticityKey, billing: storeDocument.billing},
       })
     }
 

@@ -6,7 +6,8 @@ const initialState = {
     currentPath: {
       path: '/',
       href: '/'
-    }
+    },
+    billing: 'init',
   },
   shop: {
     domain: false,
