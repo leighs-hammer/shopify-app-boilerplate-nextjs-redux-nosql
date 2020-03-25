@@ -29,6 +29,12 @@ const tabs = [
     accessibilityLabel: 'settings',
     url: '/settings'
   },
+  {
+    id: 'billing',
+    content: 'Billing',
+    accessibilityLabel: 'billing',
+    url: '/billing'
+  },
 ]
 
 

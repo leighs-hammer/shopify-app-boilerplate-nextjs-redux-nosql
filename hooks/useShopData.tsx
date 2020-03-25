@@ -19,14 +19,17 @@ const useInstall = () => {
     if(callAuthenticityKey) { return true }
 
     try {
+      dispatch({type: CONSTANTS.LOADING, payload: true})
       const response = await Axios.post('api/install', {shop: permanentDomain, code})
       if(response.data.body.callAuthenticityKey){
         dispatch({type: CONSTANTS.INSTALL_SET_DATA, payload: {...response.data.body}})
+        dispatch({type: CONSTANTS.LOADING, payload: false})
         setCallKey(response.data.body.callAuthenticityKey)
         return response.data.body.callAuthenticityKey
       }
       // no return 
     } catch (error) {
+      dispatch({type: CONSTANTS.LOADING, payload: false})
       return false
     }
   }

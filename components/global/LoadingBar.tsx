@@ -29,7 +29,7 @@ const LoadingBar = () => {
             display: block;
             border-radius: 2px;
             background-color: ${accent ? accent : '#cccc'};
-            background-image: linear-gradient(144deg, #00D0BB, #0191DE 48%, #BF3FF5);
+            background-image: linear-gradient(144deg, ${colorSet.teal.Teal}, ${colorSet.teal.Teal} 48%, ${colorSet.teal.Teal});
           }
           @keyframes SPAN-SPACE{
             0%   { width: 0%; }
