@@ -12,10 +12,11 @@ interface IFBillingCards {
   children?: any,
   items: TBillingitems,
   isExpired: boolean
+  changePlan: any // import needed
 }
 
 
-const BillingCards:React.FC<IFBillingCards> = ({items, isExpired}) => {
+const BillingCards:React.FC<IFBillingCards> = ({items, isExpired, changePlan}) => {
 
   const billing = useSelector(state => state.app.billing)
   
@@ -42,7 +43,7 @@ const BillingCards:React.FC<IFBillingCards> = ({items, isExpired}) => {
                   <span className="headingSpacing">
                     <span className="headingMain">{item.label}</span>
                     {isActive && !isFree && <Badge status='success'>Active</Badge>}
-          {isActive && isFree && <Badge status={freeStatus}>{freeText}</Badge>}
+                     {isActive && isFree && <Badge status={freeStatus}>{freeText}</Badge>}
                   </span>
                 </Heading>
                 
@@ -55,11 +56,20 @@ const BillingCards:React.FC<IFBillingCards> = ({items, isExpired}) => {
                     {!isFree && <TextStyle variation="strong">{`$${item.cost}/month`}</TextStyle>}
                     {isFree && <TextStyle variation="strong">{`Free`}</TextStyle>}
                   </Stack.Item>
-                  <Stack.Item>
-                    {!isFree && <Button primary disabled={isActive}>{isActive ? 'Active Plan' : 'Select Plan'}</Button>}
-                  </Stack.Item>
+
+                  {!isFree &&  <Stack.Item>
+                    <Button 
+                      primary 
+                      disabled={isActive} 
+                      onClick={() => changePlan(item.tier)}
+                    >
+                      {isActive ? 'Active Plan' : 'Select Plan'}
+                    </Button>
+                  </Stack.Item>}
                 </Stack>
+              
               </Card>
+
               <style jsx>{`
                 .activeHeading {
                   color: ${colorSet.indigo.Indigo};
@@ -77,6 +87,7 @@ const BillingCards:React.FC<IFBillingCards> = ({items, isExpired}) => {
                   flex: 1 auto;
                 }
               `}</style>
+
             </Layout.Section>
           )
         })

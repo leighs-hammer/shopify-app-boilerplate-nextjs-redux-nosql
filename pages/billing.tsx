@@ -4,11 +4,14 @@ import { Card, Layout, Banner, FooterHelp, Link } from '@shopify/polaris'
 import billingOptions from '../_config/billingOptions'
 import BillingCards from '../components/billing/BillingCards'
 import { useSelector } from 'react-redux';
+import useBilling from '../hooks/useBilling'
 
 const Billing = () => {
 
   const billing = useSelector(state => state.app.billing)
   const {trialStarted, trialExpires} = billing
+
+  const {changePlan, data, fetching, mustRedirect} = useBilling()
 
   const expirey = trialExpires && trialStarted ? ((trialExpires - trialStarted) / 86400000): -1
   const isExpired = billing !== 'init' && expirey < 0 
@@ -42,7 +45,7 @@ const Billing = () => {
 
         </Layout.Section>
         
-        <BillingCards items={billingOptions} isExpired={isExpired}/>
+        <BillingCards items={billingOptions} isExpired={isExpired} changePlan={changePlan}/>
 
         <FooterHelp>
           Learn more about{' '}

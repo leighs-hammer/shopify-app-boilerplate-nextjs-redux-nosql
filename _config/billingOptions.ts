@@ -4,7 +4,7 @@ export interface IFFeatureDetails {
 }
 
 export interface IFBillingObject {
-  id?: string | boolean
+  id?: string | boolean,
   tier: string, 
   label: string,
   description: string,
