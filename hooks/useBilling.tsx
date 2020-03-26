@@ -5,6 +5,8 @@ import CREATE_APP_BILLIN_SUBSCRIPTION from '../_gql/createBillingSubscription';
 import { useSelector, useDispatch } from 'react-redux';
 import dataShapeBilling from '../_utils/dataShapers/dataShapeBilling';
 import CONSTANTS from '../_constants';
+import useAppBridge from './useAppBridge';
+import { Redirect } from '@shopify/app-bridge/actions';
 
 type TchangePlan = (tier: string) => any
 
@@ -21,6 +23,7 @@ interface IFReturnUseBilling {
 const useBilling = () => {
 
   const dispatch = useDispatch()
+  const {appBridge} = useAppBridge()
   // states
   const permanentDomain: string | false = useSelector(state => state.shop.domain)
   const key: string = useSelector(state => state.app.k)
@@ -38,13 +41,13 @@ const useBilling = () => {
     if(!tier || !permanentDomain) { return false}
     
     const planDetails = billingOptions.find(item => item.tier === tier)
-    console.log(planDetails)
     if(!planDetails) { return false }
+
     
     const variables = {
         "trialDays": planDetails.trialLength,
         "name": planDetails.label,
-        "returnUrl": `https://${permanentDomain}.myshopify.com/admin/apps/${key}/billing`,
+        "returnUrl": `https://${permanentDomain}/admin/apps/${key}/billing`,
         "test": environment,
         "lineItems": [{
           "plan": {
@@ -87,14 +90,22 @@ const useBilling = () => {
 
   useEffect(() => {
     // @ts-ignore
-    if(data && (data.status !== billing.status || data.tier !== billing.tier)) { 
-      dispatch({type: CONSTANTS.UPDATE_BILLING, payload: data})
-    }
-    if(mustRedirect !== 'init') {
-      if(typeof window !== 'undefined' && window.location) { 
-        window.location.href = mustRedirect
+    if(data && (data.status !== billing.status || data.tier !== billing.tier) && mustRedirect) { 
+      if(mustRedirect){
+        if(!fetching && mustRedirect !== 'init') {
+          if(typeof window !== 'undefined' && window.location) { 
+            appBridge.dispatch(
+              Redirect.toRemote({
+                url: mustRedirect
+              })
+            )
+          }
+        }
+      } else {
+        dispatch({type: CONSTANTS.UPDATE_BILLING, payload: data})
       }
     }
+
   }, [data, mustRedirect])
 
   const returnObject: IFReturnUseBilling = {

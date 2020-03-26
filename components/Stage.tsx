@@ -59,10 +59,10 @@ const Stage = ({ children }) => {
           </Head>
           
           {/* Billing needs to be setup */}
-          {billingLoaded && !billing.active && <BillingSelector />}
+          {billingLoaded && (!billing.active || billingActive === 'PENDING')  && <BillingSelector />}
 
           {/* Billing all good */}
-          {billingLoaded && billing.active && [children]}
+          {billingLoaded &&( billing.active && billingActive !== 'PENDING') && [children]}
 
         </Page>
         
