@@ -4,6 +4,7 @@ import qs from 'querystring'
 import buildHeaders from '../../_utils/buildHeaders'
 import buildGqlEndpoint from '../../_utils/buildGqlEndpoint'
 import atlasMethods from '../../_utils/atlasMethods'
+import dataShapeBilling from '../../_utils/dataShapers/dataShapeBilling'
 
 
 
@@ -27,18 +28,21 @@ export default async (req, res) => {
   }
   
   // destructure request body
-  const {shop, gql, variables} = req.body
-
+  const {shop, gql, variables, updateDb} = req.body
+  
   // if (call Auth !== callAuth) {}
-
+  
   // Validate Incoming
   if(!shop || !gql) {
     return res.status(400).json({error: true, message: 'Missing or incorrect parameters supplied'})
   }
 
+  const client = new MongoClient(process.env.MONGO_DB_CONNECTION_STRING, { useUnifiedTopology: true })
+  
   try {
-
-    const client = new MongoClient(process.env.MONGO_DB_CONNECTION_STRING, { useUnifiedTopology: true })
+    
+    await client.connect();
+    
     const storeTokenData = await atlasMethods.getStoreTokenById(client, shop)
     
     if(!storeTokenData) {
@@ -63,16 +67,26 @@ export default async (req, res) => {
       return res.status(417).json({error: true, message: 'Data was not returned from shopify'})
     }
 
+    if(updateDb) { 
+      // @todo move to a switch or do something less rudimentary
+      if(updateDb === 'billing') {
+        await atlasMethods.updateField(client, shop, updateDb, dataShapeBilling(shopifyResponse))
+      }
+    }
+
     return res.status(200).json({ ...shopifyResponse.data })
     
   } catch (error) {
-    // handle request error
-    console.error(error.message)
-    return res.status(error.status ? error.status : 400).json({
+    
+    console.error(error)
+    return res.status(error.status ? error.status : 500).json({
       error: true, 
       message: error.message,
       request: {shop, gql, variables}
     })
+
+  } finally {
+    await client.close()
   }
 
   // If you reached this everything is all apart

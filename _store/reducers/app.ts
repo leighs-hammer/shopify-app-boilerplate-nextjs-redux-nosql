@@ -20,6 +20,12 @@ export default produce((draft, action) => {
       })
       return draft
 
+    case CONSTANTS.UPDATE_BILLING:
+      draft = Object.assign({}, draft, {
+        billing: action.payload,
+      })
+      return draft
+
 
   }
 })

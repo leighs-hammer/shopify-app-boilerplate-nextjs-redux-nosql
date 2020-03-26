@@ -12,23 +12,17 @@ export interface IFBillingObject {
   cost: number,
   includesLowerTiers?: string,
   features?: IFFeatureDetails[],
+  trialLength: number,
 }
 
 const billingOptions: IFBillingObject[] = [
-  {
-    id: 'internal',
-    tier: 'free',
-    label: 'Trial',
-    description: 'Free to test our app for 7 days', 
-    active: true,
-    cost: 0.00
-  },
   {
     id: false,
     tier: 'basic',
     label: 'Basic',
     description: 'Ready to take it up a level',
     active: false,
+    trialLength: 14,
     cost: 10.00,
     features: [
       {
@@ -43,6 +37,7 @@ const billingOptions: IFBillingObject[] = [
     label: 'Pro',
     description: 'All the bells and wistles',
     active: false,
+    trialLength: 0,
     cost: 30.00,
     includesLowerTiers: 'Includes everything from basic',
     features: [
@@ -53,6 +48,22 @@ const billingOptions: IFBillingObject[] = [
       {
         label: 'Even More awesome',
       }
+    ]
+  },
+  {
+    id: false,
+    tier: 'Plus',
+    label: 'plus',
+    description: 'Designed for high volume stores',
+    active: false,
+    trialLength: 0,
+    cost: 99.00,
+    includesLowerTiers: 'Includes everything from pro',
+    features: [
+      {
+        label: 'Teir 2 Support',
+        details: 'Tier two support and consultancy (billed) available'
+      },
     ]
   }
 ]

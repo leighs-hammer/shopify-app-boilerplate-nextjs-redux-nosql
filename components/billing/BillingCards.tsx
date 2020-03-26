@@ -11,12 +11,11 @@ type TBillingitems = IFBillingObject[] | []
 interface IFBillingCards {
   children?: any,
   items: TBillingitems,
-  isExpired: boolean
   changePlan: any // import needed
 }
 
 
-const BillingCards:React.FC<IFBillingCards> = ({items, isExpired, changePlan}) => {
+const BillingCards:React.FC<IFBillingCards> = ({items, changePlan}) => {
 
   const billing = useSelector(state => state.app.billing)
   
@@ -29,8 +28,6 @@ const BillingCards:React.FC<IFBillingCards> = ({items, isExpired, changePlan}) =
           
           const isActive = billing.tier === item.tier
           const isFree = item.tier === 'free' || item.cost === 0.00
-          const freeStatus = isExpired ? 'attention': 'success'
-          const freeText = isExpired ? 'expired': 'active'
 
           return (
             <Layout.Section oneThird key={item.tier}>
@@ -42,19 +39,16 @@ const BillingCards:React.FC<IFBillingCards> = ({items, isExpired, changePlan}) =
                 <Heading>
                   <span className="headingSpacing">
                     <span className="headingMain">{item.label}</span>
-                    {isActive && !isFree && <Badge status='success'>Active</Badge>}
-                     {isActive && isFree && <Badge status={freeStatus}>{freeText}</Badge>}
+          {isActive && !isFree && <Badge status='success'>{billing.status}</Badge>}
                   </span>
                 </Heading>
                 
                 <p>{item.description}</p>
 
-                <BillingFeatureList features={item.features} />
 
-                <Stack spacing="loose" alignment="center" distribution="trailing">
+                <Stack spacing="loose" alignment="center" distribution="center">
                   <Stack.Item>
                     {!isFree && <TextStyle variation="strong">{`$${item.cost}/month`}</TextStyle>}
-                    {isFree && <TextStyle variation="strong">{`Free`}</TextStyle>}
                   </Stack.Item>
 
                   {!isFree &&  <Stack.Item>
@@ -67,6 +61,8 @@ const BillingCards:React.FC<IFBillingCards> = ({items, isExpired, changePlan}) =
                     </Button>
                   </Stack.Item>}
                 </Stack>
+                Features
+                <BillingFeatureList features={item.features} />
               
               </Card>
 

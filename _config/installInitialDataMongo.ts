@@ -12,11 +12,8 @@ const installInitialDataMongo = (shop, token) => {
     shopifyApiTokenError: false,
     callAuthenticityKey: uuidv4(),
     billing: {
-      tier: 'free',
-      active: true,
-      trialStarted: installDate.getTime(),
-      trialExpires: expiresDate.getTime(),
-      trialExpiresMessage: expiresDate,
+      active: false,
+      status: 'init'
     },
     billingHistory: []
   }

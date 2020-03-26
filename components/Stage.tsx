@@ -10,6 +10,9 @@ import useInstall from '../hooks/useShopData'
 
 import LoadingBar from './global/LoadingBar'
 import TopNav from './Navigation/TopNav'
+import { useSelector } from 'react-redux';
+import LoadingPage from './global/LoadingPage'
+import BillingSelector from './billing/BillingSelector'
 
 
 
@@ -21,11 +24,17 @@ const Stage = ({ children }) => {
   // install or set call key
   const install = useInstall()
 
+  const billing = useSelector(state => state.app.billing)
+  
+  const billingLoaded =  billing !== 'init'
+  const billingActive = billing.active
+
   return (
     <React.Fragment>
       <div className="Header">
         <LoadingBar />
-        <TopNav />
+        {billingLoaded && billingActive && <TopNav />}
+
         <style jsx>{`
           .Header {
             position: fixed;
@@ -36,21 +45,34 @@ const Stage = ({ children }) => {
           }
         `}</style>
       </div>
-      
-      <main className="mainWrapper">
+
+      {/* Connections still loading */}
+      {!billingLoaded && <LoadingPage />}
+
+      {/* Main Return */}
+      { billingLoaded && <main className="mainWrapper">
         <Page>
+
           <Head>
             <title>App Boilerplate</title>
             <link rel="icon" href="/static/favicon.ico" />
           </Head>
-          {children}
+          
+          {/* Billing needs to be setup */}
+          {billingLoaded && !billing.active && <BillingSelector />}
+
+          {/* Billing all good */}
+          {billingLoaded && billing.active && [children]}
+
         </Page>
+        
         <style jsx>{`
           .mainWrapper {
             padding-top: 60px;
           }  
         `}</style>
-      </main>
+      
+      </main> }
 
     </React.Fragment>
   )
