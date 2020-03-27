@@ -11,21 +11,21 @@ export const listDatabases = async (client: MongoClient) => {
 }
 
 
-export const createStoreDocument = async (client, document) => {
+export const createStoreDocument = async (client: MongoClient, document: any) => {
   const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).insertOne(document);
   console.log(`New listing created with the following id: ${result.insertedId}`);
   return document.callAuthenticityKey
 }
 
 
-export const createMultipleStoreDocuments = async (client, document) => {
+export const createMultipleStoreDocuments = async (client: MongoClient, id: string) => {
   const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).insertMany(document);
 
   console.log(`${result.insertedCount} new listing(s) created with the following id(s):`);
 
 }
 
-export const findOneStoreDocumentById = async (client, id) => {
+export const findOneStoreDocumentById = async (client: MongoClient, id: string) => {
 
   const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).findOne({ _id: id });
   if(result) {
@@ -37,7 +37,7 @@ export const findOneStoreDocumentById = async (client, id) => {
   }
 }
 
-export const getStoreTokenById = async (client, id) => {
+export const getStoreTokenById = async (client: MongoClient, id: string) => {
   const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).findOne({ _id: id })
   if(result) {
     const {shopifyApiToken, callAuthenticityKey} = result 
@@ -46,7 +46,7 @@ export const getStoreTokenById = async (client, id) => {
   return false
 }
 
-export const updateField = async (client, id, field, payload) => {
+export const updateField = async (client: MongoClient, id: string, field: string, payload: any) => {
   const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).updateOne({ _id: id }, {$set: { [field] : payload}})
   console.log(`updating ${id}.${field}`)
   if(result) {
@@ -63,7 +63,7 @@ export const getBilling = async (client: MongoClient, id: string) => {
   return false
 }
 
-export const deleteDocumentById = async (client, id) => {
+export const deleteDocumentById = async (client: MongoClient, id: string) => {
   const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).deleteOne({_id: id})
   if(result) {
     return result
