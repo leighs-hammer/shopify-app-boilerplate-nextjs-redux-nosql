@@ -1,11 +1,5 @@
 import checkHmacValidity from 'shopify-hmac-validation'
 
-// export const config = {
-//   api: {
-//     bodyParser: process.env.NODE_ENV !== 'production'
-//   }
-// };
-
 export default async (req, res) => {
   console.log('Auth started');
  

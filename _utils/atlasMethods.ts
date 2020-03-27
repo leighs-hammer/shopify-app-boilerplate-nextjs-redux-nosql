@@ -60,13 +60,22 @@ export const getBilling = async (client: MongoClient, id: string) => {
   if(result) {
     return result
   }
-  return true
+  return false
+}
+
+export const deleteDocumentById = async (client, id) => {
+  const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).deleteOne({_id: id})
+  if(result) {
+    return result
+  }
+  return false
 }
 
 // Index
 const atlasMethods = {
   createStoreDocument,
   createMultipleStoreDocuments,
+  deleteDocumentById,
   findOneStoreDocumentById,
   getStoreTokenById,
   listDatabases,
