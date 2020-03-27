@@ -25,7 +25,7 @@
     "immer": "^6.0.2",
     "immer-combine-reducers": "^1.0.1",
     "mongodb": "^3.5.5",
-    "next": "9.3.1",
+    "next": "9.3.2",
     "next-redux-wrapper": "^5.0.0",
     "nonce": "^1.0.4",
     "query-string": "^6.11.1",
