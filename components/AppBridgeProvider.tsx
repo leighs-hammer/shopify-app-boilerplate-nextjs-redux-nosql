@@ -18,7 +18,6 @@ const AppBridgeProvider = ({children}) => {
 
   const appBridgeConfig = {apiKey: key, shopOrigin: permanentDomain, forceRedirect: true}
 
-  console.log(appBridgeConfig)
   return (
     <Provider config={appBridgeConfig}>
       {children}

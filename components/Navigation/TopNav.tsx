@@ -55,7 +55,6 @@ const TopNav = () => {
 
     if(currentPath && currentPath.path) {
       const indexOfTab = tabs.findIndex(item => item.url.includes(currentPath.path))
-
       if(indexOfTab !== -1 && selected !== indexOfTab) {
         setSelected(indexOfTab)
       }

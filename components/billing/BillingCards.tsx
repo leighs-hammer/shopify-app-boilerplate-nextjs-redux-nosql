@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Layout, Card, Heading, Badge, Stack, Button, TextStyle } from '@shopify/polaris'
 import { IFBillingObject } from '../../_config/billingOptions';
 import { useSelector } from 'react-redux';
@@ -11,26 +11,42 @@ type TBillingitems = IFBillingObject[] | []
 interface IFBillingCards {
   children?: any,
   items: TBillingitems,
-  isExpired: boolean
   changePlan: any // import needed
 }
 
 
-const BillingCards:React.FC<IFBillingCards> = ({items, isExpired, changePlan}) => {
+const BillingCards:React.FC<IFBillingCards> = ({items, changePlan}) => {
 
   const billing = useSelector(state => state.app.billing)
+  const [expandedFeatures, setexpandedFeatures] = useState(false)
   
   if(!billing) { return null}
+
+  const indexOfCurrent = items.findIndex((item: IFBillingObject) => (billing.active === 'ACTIVE' && item.tier === billing.tier) )
+
 
   return (
     <React.Fragment>
       {
-        [...items].map((item: IFBillingObject) => {
+        [...items].map((item: IFBillingObject, index) => {
           
-          const isActive = billing.tier === item.tier
+          const isActive = billing.tier === item.tier && billing.active
           const isFree = item.tier === 'free' || item.cost === 0.00
-          const freeStatus = isExpired ? 'attention': 'success'
-          const freeText = isExpired ? 'expired': 'active'
+
+          const shouldDowngrade = indexOfCurrent > index
+          
+          const buttonText = () => {
+            
+            if (isActive) {
+              return 'Active Plan'
+            }
+            
+            if (shouldDowngrade) {
+              return 'downgrade'
+            }
+
+            return 'Select plan'
+          }
 
           return (
             <Layout.Section oneThird key={item.tier}>
@@ -42,28 +58,40 @@ const BillingCards:React.FC<IFBillingCards> = ({items, isExpired, changePlan}) =
                 <Heading>
                   <span className="headingSpacing">
                     <span className="headingMain">{item.label}</span>
-                    {isActive && !isFree && <Badge status='success'>Active</Badge>}
-                     {isActive && isFree && <Badge status={freeStatus}>{freeText}</Badge>}
+                      {isActive && !isFree && <Badge status='success'>{billing.status}</Badge>}
                   </span>
                 </Heading>
                 
-                <p>{item.description}</p>
+                <div className="descriptionSpacing">
+                  <TextStyle>{item.description}</TextStyle>
+                  {!shouldDowngrade && item.descriptionTrial && !isActive && <TextStyle variation='subdued'> {item.descriptionTrial}</TextStyle>}
+                </div>
 
-                <BillingFeatureList features={item.features} />
+                <Stack spacing="loose" alignment="center" distribution="center">
+                  <Stack.Item>
+                    <Button 
+                      size="slim"
+                      onClick={() => setexpandedFeatures(!expandedFeatures)}
+                    >
+                      {expandedFeatures ? 'Contract' : 'Expand'} features
+                    </Button>
+                  </Stack.Item>
+                </Stack>
 
-                <Stack spacing="loose" alignment="center" distribution="trailing">
+                <BillingFeatureList features={item.features} expandedFeatures={expandedFeatures}/>
+
+                <Stack spacing="loose" alignment="center" distribution="center">
                   <Stack.Item>
                     {!isFree && <TextStyle variation="strong">{`$${item.cost}/month`}</TextStyle>}
-                    {isFree && <TextStyle variation="strong">{`Free`}</TextStyle>}
                   </Stack.Item>
 
                   {!isFree &&  <Stack.Item>
                     <Button 
                       primary 
                       disabled={isActive} 
-                      onClick={() => changePlan(item.tier)}
+                      onClick={() => changePlan(item.tier, shouldDowngrade)}
                     >
-                      {isActive ? 'Active Plan' : 'Select Plan'}
+                      {buttonText()}
                     </Button>
                   </Stack.Item>}
                 </Stack>
@@ -85,6 +113,10 @@ const BillingCards:React.FC<IFBillingCards> = ({items, isExpired, changePlan}) =
                 }
                 .headingMain {
                   flex: 1 auto;
+                }
+                .descriptionSpacing {
+                  min-height: 32px;
+                  margin-bottom: 16px;
                 }
               `}</style>
 

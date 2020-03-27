@@ -4,11 +4,13 @@ import createApp from '@shopify/app-bridge'
 import { HistoryAction } from '@shopify/app-bridge/actions/Navigation/History'
 import {useDispatch, useSelector} from 'react-redux'
 import CONSTANTS from '../_constants'
+import qs from 'query-string'
 
 /**
  * Keeps shopify and the iframe in sync. 
  */
 
+ // @todo move to using useAppBridge rather than its own instantiation
 
 const useRouterSync = () => {
 
@@ -18,14 +20,17 @@ const useRouterSync = () => {
 
   useEffect(() => {
     if(window && permanentDomain) {
-      const path = window.location.pathname
+      
+      const query = qs.parse(window.location.search)
+      const path = `${window.location.pathname}${window.location.search}`
+      const pathClean = `${window.location.pathname}`
       const shopifyHistoryActions = app => History.create(app)
       const shopifyAppBridge = permanentDomain ? createApp({apiKey: shopifyKey, shopOrigin: permanentDomain}) : false
       const shopifyHistory =  shopifyAppBridge ? shopifyHistoryActions(shopifyAppBridge) : false
 
       if(shopifyHistory) {
         shopifyHistory.dispatch(History.Action.PUSH, path)
-        dispatch({type: CONSTANTS.UPDATE_CURRENT_PATH, payload: {path: path, href: window.location.href}})
+        dispatch({type: CONSTANTS.UPDATE_CURRENT_PATH, payload: {path: pathClean, href: window.location.href, query}})
         console.log('SHOPIFY NAV UPDATED: ', path)
       }
     }

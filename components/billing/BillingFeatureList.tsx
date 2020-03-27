@@ -6,9 +6,10 @@ import colorSet from '../../_constants/colorSets';
 
 export interface IFBillingFeatureList {
   features?: IFFeatureDetails[]
+  expandedFeatures: boolean
 }
  
-const BillingFeatureList: React.SFC<IFBillingFeatureList> = ({features}) => {
+const BillingFeatureList: React.SFC<IFBillingFeatureList> = ({features, expandedFeatures}) => {
   if(!features) { return null }
 
   return (  
@@ -24,7 +25,7 @@ const BillingFeatureList: React.SFC<IFBillingFeatureList> = ({features}) => {
             
             <div className="BillingItemDetails">
               <TextStyle variation="strong">{item.label}</TextStyle>
-              {item.details && <TextStyle variation="subdued">{item.details}</TextStyle>}
+              {item.details && expandedFeatures && <TextStyle variation="subdued">{item.details}</TextStyle>}
             </div>
 
           </li>
