@@ -54,6 +54,14 @@ export const updateField = async (client, id, field, payload) => {
   return false
 }
 
+export const getBilling = async (client, id) => {
+  const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).findOne({_id: id}, { billing: 1})
+  if(result) {
+    return result
+  }
+  return true
+}
+
 // Index
 const atlasMethods = {
   createStoreDocument,
@@ -62,6 +70,7 @@ const atlasMethods = {
   getStoreTokenById,
   listDatabases,
   updateField,
+  getBilling,
 }
 
 export default atlasMethods

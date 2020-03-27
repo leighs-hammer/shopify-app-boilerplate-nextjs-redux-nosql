@@ -24,12 +24,18 @@ const useBilling = () => {
 
   const dispatch = useDispatch()
   const {appBridge} = useAppBridge()
-  // states
+  
+  // selectors
   const permanentDomain: string | false = useSelector(state => state.shop.domain)
+  const appUrl: string = useSelector(state => state.app.appUrl)
   const key: string = useSelector(state => state.app.k)
   const billing: any = useSelector(state => state.app.billing)
-  const environment: string = useSelector(state => state.app.environment)
+  const cak: any = useSelector(state => state.app.callAuthenticityKey)
 
+  // development test params will be used
+  const isDev: string = useSelector(state => state.app.environment)
+
+  // statesd
   const [fetching, setFetching] = useState(false)
   const [data, setData] = useState()
   const [error, setError] = useState()
@@ -47,8 +53,8 @@ const useBilling = () => {
     const variables = {
         "trialDays": planDetails.trialLength,
         "name": planDetails.label,
-        "returnUrl": `https://${permanentDomain}/admin/apps/${key}/billing`,
-        "test": environment,
+        "returnUrl": `${appUrl}/api/verifybilling?shop=${permanentDomain}&cak=${cak}`,
+        "test": isDev,
         "lineItems": [{
           "plan": {
             "appRecurringPricingDetails": {
@@ -81,8 +87,6 @@ const useBilling = () => {
     } catch (error) {
       console.error('could not create subscription', error.message)
     }
-
-
   }
 
   // syncBillingInfo
@@ -90,7 +94,7 @@ const useBilling = () => {
 
   useEffect(() => {
     // @ts-ignore
-    if(data && (data.status !== billing.status || data.tier !== billing.tier) && mustRedirect) { 
+    if(data && !data.active && mustRedirect) { 
       if(mustRedirect){
         if(!fetching && mustRedirect !== 'init') {
           if(typeof window !== 'undefined' && window.location) { 

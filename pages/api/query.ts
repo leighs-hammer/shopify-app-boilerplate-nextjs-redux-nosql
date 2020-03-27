@@ -41,7 +41,7 @@ export default async (req, res) => {
   
   try {
     
-    await client.connect();
+    await client.connect()
     
     const storeTokenData = await atlasMethods.getStoreTokenById(client, shop)
     

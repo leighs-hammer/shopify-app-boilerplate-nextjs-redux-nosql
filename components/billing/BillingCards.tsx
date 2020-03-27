@@ -26,7 +26,7 @@ const BillingCards:React.FC<IFBillingCards> = ({items, changePlan}) => {
       {
         [...items].map((item: IFBillingObject) => {
           
-          const isActive = billing.tier === item.tier
+          const isActive = billing.tier === item.tier && billing.active
           const isFree = item.tier === 'free' || item.cost === 0.00
 
           return (

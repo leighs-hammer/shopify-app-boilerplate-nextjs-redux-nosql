@@ -11,7 +11,7 @@ const dataShapeBilling = (response) => {
   const {tier, cost} = optionDetails
 
   const billingObject = {
-    active: status, // add active status
+    active: false, // add active status
     cost,
     tier,
     createdAt,

@@ -31,7 +31,7 @@ const BillingSelector = () => {
   return (
     <Layout>
       
-      {billing.status === 'init' &&  
+      {billing.status === 'init' || !billing.active &&  
         <Layout.Section fullWidth>
           <BillingBannerInit />
         </Layout.Section>
