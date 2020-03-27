@@ -1,6 +1,10 @@
 import appConfig from '../_config/config';
 import { MongoClient } from 'mongodb';
 
+export const createDBClient = () => {
+  const client: MongoClient = new MongoClient(process.env.MONGO_DB_CONNECTION_STRING, { useUnifiedTopology: true })
+  return client
+}
 
 export const listDatabases = async (client: MongoClient) => {
 
@@ -71,8 +75,10 @@ export const deleteDocumentById = async (client: MongoClient, id: string) => {
   return false
 }
 
+
 // Index
 const atlasMethods = {
+  createDBClient,
   createStoreDocument,
   createMultipleStoreDocuments,
   deleteDocumentById,
@@ -82,5 +88,7 @@ const atlasMethods = {
   updateField,
   getBilling,
 }
+
+
 
 export default atlasMethods
