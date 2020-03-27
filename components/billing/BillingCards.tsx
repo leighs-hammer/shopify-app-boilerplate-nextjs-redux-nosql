@@ -42,10 +42,10 @@ const BillingCards:React.FC<IFBillingCards> = ({items, changePlan}) => {
             }
             
             if (shouldDowngrade) {
-              return 'downgrade'
+              return 'Downgrade plan'
             }
 
-            return 'Select plan'
+            return 'Upgrade plan'
           }
 
           return (
