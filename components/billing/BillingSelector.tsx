@@ -20,18 +20,17 @@ const BillingSelector = () => {
   
 
 
+  // set fetching
   useEffect(() => {
-
     if(loading !== fetching) {
       dispatch({type: CONSTANTS.LOADING, payload: fetching})
     }
-
   }, [fetching])
 
   return (
     <Layout>
       
-      {billing.status === 'init' || !billing.active &&  
+      {(billing.status === 'init' || !billing.active) &&  
         <Layout.Section fullWidth>
           <BillingBannerInit />
         </Layout.Section>

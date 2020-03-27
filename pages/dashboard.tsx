@@ -1,12 +1,24 @@
 import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 import Stage from '../components/Stage'
-import Axios from 'axios'
-import qs from 'query-string'
-import { Card } from '@shopify/polaris'
+import { Card, Banner } from '@shopify/polaris'
 
 const Dashboard = () => {
+  const router = useRouter()
+
+  const {billingApproved, plan} = router.query
+
   return (
     <Stage>
+      {billingApproved && <Banner
+        title="Welcome to the family!"
+        action={{content: 'Quick start'}}
+        status="info"
+        onDismiss={() => {}}
+      >
+        <p>If you would like a quick tour of the features </p>
+        </Banner>
+      }
       <Card sectioned 
         title="Dashboard"
       >

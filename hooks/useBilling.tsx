@@ -8,7 +8,7 @@ import CONSTANTS from '../_constants';
 import useAppBridge from './useAppBridge';
 import { Redirect } from '@shopify/app-bridge/actions';
 
-type TchangePlan = (tier: string) => any
+type TchangePlan = (tier: string, disableTrial: boolean | undefined) => any
 
 interface IFReturnUseBilling {
   fetching: boolean
@@ -42,7 +42,7 @@ const useBilling = () => {
   const [mustRedirect, setMustRedirect] = useState('init')
 
   // Change Plan
-  const changePlan: TchangePlan = async (tier) => {
+  const changePlan: TchangePlan = async (tier, disableTrial) => {
     
     if(!tier || !permanentDomain) { return false}
     
@@ -51,7 +51,7 @@ const useBilling = () => {
 
     
     const variables = {
-        "trialDays": planDetails.trialLength,
+        "trialDays": disableTrial ? 0 : planDetails.trialLength,
         "name": planDetails.label,
         "returnUrl": `${appUrl}/api/verifybilling?shop=${permanentDomain}&cak=${cak}`,
         "test": isDev,

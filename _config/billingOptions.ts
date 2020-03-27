@@ -8,7 +8,8 @@ export interface IFBillingObject {
   tier: string, 
   label: string,
   description: string,
-  active: boolean,
+  descriptionTrial?: string,
+  active: boolean | string,
   cost: number,
   includesLowerTiers?: string,
   features?: IFFeatureDetails[],
@@ -20,7 +21,8 @@ const billingOptions: IFBillingObject[] = [
     id: false,
     tier: 'basic',
     label: 'Basic',
-    description: 'Ready to take it up a level',
+    description: 'Get started with out basic feature set',
+    descriptionTrial: 'includes a 14 day free trial',
     active: false,
     trialLength: 14,
     cost: 10.00,
@@ -35,7 +37,7 @@ const billingOptions: IFBillingObject[] = [
     id: false,
     tier: 'pro',
     label: 'Pro',
-    description: 'All the bells and wistles',
+    description: 'Lets crank it up a level',
     active: false,
     trialLength: 0,
     cost: 30.00,
@@ -63,6 +65,14 @@ const billingOptions: IFBillingObject[] = [
       {
         label: 'Teir 2 Support',
         details: 'Tier two support and consultancy (billed) available'
+      },
+      {
+        label: 'Integration suppport',
+        details: 'Additional consultancy for high level integrations'
+      },
+      {
+        label: 'Slack access',
+        details: 'Speak directly to the team!'
       },
     ]
   }

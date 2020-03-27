@@ -10,6 +10,7 @@ import qs from 'query-string'
  * Keeps shopify and the iframe in sync. 
  */
 
+ // @todo move to using useAppBridge rather than its own instantiation
 
 const useRouterSync = () => {
 

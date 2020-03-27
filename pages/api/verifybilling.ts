@@ -5,15 +5,7 @@ import dataShapeBillingVerify from '../../_utils/dataShapers/dataShapeBillingVer
 
 export default async (req, res) => {
 
-  // // same frontend only and POST exclusively
-  // if(process.env.NODE_ENV !== 'development') {
-  //   const secFetchSite = req.headers['sec-fetch-site']
-  
-  //   // early respond for malicious & wrong methods of requests
-  //   if(req.method !== 'POST' || secFetchSite !== 'same-origin') {
-  //     return res.status(400).json({error: true, message: 'Method not allowed'})
-  //   }
-  // }
+
 
   // no body sent
   if(!req.query) {
@@ -22,8 +14,7 @@ export default async (req, res) => {
 
   // destructure request body
   const {shop, charge_id, cak} = req.query
-  // console.log(req.query)
-  // console.log(req.headers)
+
 
   // // Validate Incoming
   if(!shop || !cak) {
@@ -37,7 +28,8 @@ export default async (req, res) => {
     
     const dbDoc = await findOneStoreDocumentById(client, shop)
     
-    if(!dbDoc) {
+    // checks for existence authenticity of pass through
+    if(!dbDoc || dbDoc.callAuthenticityKey !== cak) {
       res.writeHead(302, {
         'Location': `https://${shop}/admin/apps/${process.env.SHOPIFY_API_KEY}/billing?errorVerifying=true`
       })
@@ -57,12 +49,11 @@ export default async (req, res) => {
 
     const specificBillingObjectApproved = shopifyCurrentAppBilling[0]
     const shapedBilling = dataShapeBillingVerify(specificBillingObjectApproved)
-    console.log({shapedBilling})
     const updateDb = await updateField(client, shop, 'billing', shapedBilling)
-    console.log(updateDb)
+
     if(updateDb) {
       res.writeHead(302, {
-        'Location': `https://${shop}/admin/apps/${process.env.SHOPIFY_API_KEY}/billing?billingApproved=true`
+        'Location': `https://${shop}/admin/apps/${process.env.SHOPIFY_API_KEY}/dashboard?billingApproved=true&plan=${shapedBilling.tier}`
       })
 
       return res.end()

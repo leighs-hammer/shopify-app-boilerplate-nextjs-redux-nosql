@@ -13,8 +13,8 @@ const Home = (props) => {
 
   // page context params
   useEffect(() => {
-    const query = qs.parse(window.location.search)
     if(typeof window !== 'undefined' && window.location) {
+      const query = qs.parse(window.location.search)
       axios.post('/api/auth', {
         query: query,
         state: state
