@@ -22,7 +22,7 @@ const BillingCards:React.FC<IFBillingCards> = ({items, changePlan}) => {
   
   if(!billing) { return null}
 
-  const indexOfCurrent = items.findIndex(item => (billing.active === 'ACTIVE' && item.tier === billing.tier) )
+  const indexOfCurrent = items.findIndex((item: IFBillingObject) => (billing.active === 'ACTIVE' && item.tier === billing.tier) )
 
 
   return (
