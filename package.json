@@ -19,6 +19,7 @@
     "@shopify/app-bridge": "^1.20.0",
     "@shopify/app-bridge-react": "^1.20.0",
     "@shopify/polaris": "^4.16.1",
+    "@types/mongodb": "^3.5.4",
     "axios": "^0.19.2",
     "deepmerge": "^4.2.2",
     "dotenv": "^8.2.0",

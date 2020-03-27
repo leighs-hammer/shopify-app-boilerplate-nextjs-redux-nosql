@@ -1,7 +1,8 @@
 import appConfig from '../_config/config';
+import { MongoClient } from 'mongodb';
 
 
-export const listDatabases = async (client) => {
+export const listDatabases = async (client: MongoClient) => {
 
   const databasesList = await client.db().admin().listDatabases();
 
@@ -54,7 +55,7 @@ export const updateField = async (client, id, field, payload) => {
   return false
 }
 
-export const getBilling = async (client, id) => {
+export const getBilling = async (client: MongoClient, id: string) => {
   const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).findOne({_id: id}, { billing: 1})
   if(result) {
     return result
