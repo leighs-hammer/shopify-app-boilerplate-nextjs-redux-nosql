@@ -21,14 +21,6 @@ export const createStoreDocument = async (client: MongoClient, document: any) =>
   return document.callAuthenticityKey
 }
 
-
-export const createMultipleStoreDocuments = async (client: MongoClient, id: string) => {
-  const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).insertMany(document);
-
-  console.log(`${result.insertedCount} new listing(s) created with the following id(s):`);
-
-}
-
 export const findOneStoreDocumentById = async (client: MongoClient, id: string) => {
 
   const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).findOne({ _id: id });
@@ -80,7 +72,6 @@ export const deleteDocumentById = async (client: MongoClient, id: string) => {
 const atlasMethods = {
   createDBClient,
   createStoreDocument,
-  createMultipleStoreDocuments,
   deleteDocumentById,
   findOneStoreDocumentById,
   getStoreTokenById,
