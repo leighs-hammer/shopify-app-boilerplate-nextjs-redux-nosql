@@ -1,18 +1,27 @@
 # Add 'label1' to any changes within 'example' folder or any subfolders
 api:
-  - /pages/api/**/*
+  - pages/api/**/*
+
+webhooks:
+  - pages/api/webhooke/**/*
+
+databse:
+  - _utils/atlasMethods.ts
+
+shopifyMethods:
+  - _utils/shopifyMethods.ts
 
 redux:
-- /_store/**/*
+- _store/**/*
 
 appConfig: 
-- /_config/**/*
+- _config/**/*
 
 components: 
-- /components/**/*
+- components/**/*
 
 hooks: 
-- /hooks/**/*
+- hooks/**/*
 
 public: 
-- /public/**/*
+- public/**/*
