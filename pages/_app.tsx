@@ -9,6 +9,8 @@ import { initializeStore } from '../_store/store'
 import AppBridgeProvider from '../components/AppBridgeProvider'
 import '@shopify/polaris/styles.css'
 import PolarisProvider from '../components/PolarisProvider'
+import I81nProvider from '../components/I18nProvider'
+import { TextProvider } from '../components/TextProvider'
 
 // import InstallProvider from '../components/InstallProvider'
 
@@ -31,11 +33,13 @@ class MyApp extends App {
 
     return (
       <Provider store={store}>
-        <PolarisProvider>
-          <AppBridgeProvider>
-            <Component {...pageProps} />
-          </AppBridgeProvider>
-        </PolarisProvider>
+        <AppBridgeProvider>
+          <I81nProvider>
+            <PolarisProvider>
+              <Component {...pageProps} />
+            </PolarisProvider>
+          </I81nProvider>
+        </AppBridgeProvider>
       </Provider>
     );
   }

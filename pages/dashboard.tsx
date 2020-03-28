@@ -3,10 +3,13 @@ import { useRouter } from 'next/router'
 import Stage from '../components/Stage'
 import { Card, Banner } from '@shopify/polaris'
 
+
 const Dashboard = () => {
   const router = useRouter()
-
+  
   const {billingApproved, plan} = router.query
+  
+  
 
   return (
     <Stage>
