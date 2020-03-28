@@ -1,5 +1,5 @@
 import {MongoClient} from 'mongodb'
-import { listDatabases, createStoreDocument, findOneStoreDocumentById, getBilling, updateField } from '../../_utils/atlasMethods';
+import { findOneStoreDocumentById, updateField } from '../../_utils/atlasMethods';
 import { getCurrentAppBilling } from '../../_utils/shopifyMethods';
 import dataShapeBillingVerify from '../../_utils/dataShapers/dataShapeBillingVerify';
 

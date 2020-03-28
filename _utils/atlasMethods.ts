@@ -51,13 +51,6 @@ export const updateField = async (client: MongoClient, id: string, field: string
   return false
 }
 
-export const getBilling = async (client: MongoClient, id: string) => {
-  const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).findOne({_id: id}, { billing: 1})
-  if(result) {
-    return result
-  }
-  return false
-}
 
 export const deleteDocumentById = async (client: MongoClient, id: string) => {
   const result = await client.db(appConfig.dbName).collection(appConfig.dbRoot).deleteOne({_id: id})
@@ -77,7 +70,6 @@ const atlasMethods = {
   getStoreTokenById,
   listDatabases,
   updateField,
-  getBilling,
 }
 
 
