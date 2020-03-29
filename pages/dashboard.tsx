@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Stage from '../components/Stage'
 import { Card, Banner } from '@shopify/polaris'
-
+import { T } from '../components/TextProvider';
 
 const Dashboard = () => {
   const router = useRouter()
@@ -25,6 +25,7 @@ const Dashboard = () => {
       <Card sectioned 
         title="Dashboard"
       >
+        {T('Test')}
         <p>Place holder for the dashboard content!</p>
       </Card>
     </Stage>
