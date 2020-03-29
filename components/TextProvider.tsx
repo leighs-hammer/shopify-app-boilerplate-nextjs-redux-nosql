@@ -1,13 +1,20 @@
 import React, {createContext, useContext, useState, useEffect} from 'react'
 import fetch from 'isomorphic-unfetch'
+
+// Set defaults in shouldFetchtranslation
 import shouldFetchtranslation, {fallbackLocale, fallbackPreloadedLibrary} from '../_utils/shouldFetchtranslation'
+
 import safelyGetNestedText from '../_utils/safelyGetNestedText'
 import { IFTextContext, Tt, TtBlock } from '../_types/textProvider';
 
-
+/**
+ * Context
+ */
 export const TextContext: React.Context<any> = createContext({})
 
-
+/**
+ * TextProvider - wrap the app nested below app bridge Component
+ */
 export const TextProvider: React.FC<IFTextContext> = ({children, locale}) => {
 
   const [currentLocale, setCurrentLocale] = useState(fallbackLocale)
@@ -61,9 +68,14 @@ export const TextProvider: React.FC<IFTextContext> = ({children, locale}) => {
   )
 }
 
-
+/**
+ * useTranslation - returns current translation dictionary
+ */
 export const useTranslation = () => useContext(TextContext).activeTranslation
 
+/**
+ * T our text helper function that returns text strings singular. 
+ */
 export const T: Tt = (textKey) => {
   
   const Context = useContext(TextContext)
@@ -86,7 +98,9 @@ export const T: Tt = (textKey) => {
   // no TranslationFound
   return 'NO TRANSLATION FOUND'
 }
-
+/**
+ * TBlock - returns a block of text ina  single call for more performant text at a component level
+ */
 export const TBlock: TtBlock = (textKey) => {
 
   const Context = useContext(TextContext)
@@ -110,8 +124,9 @@ export const TBlock: TtBlock = (textKey) => {
   return 'NO BLOCK FOUND CHECK YOU LOCALES'
 }
 
-// just for sanity sake
-
+/**
+ * The default index export of all methods and Components
+ */
 const TextProviderIndex = {
   TBlock,
   T,

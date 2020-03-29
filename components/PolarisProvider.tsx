@@ -1,16 +1,12 @@
 import React, { useEffect } from 'react'
-import { useI18n, I18nContext } from '@shopify/react-i18n';
 
 import {AppProvider} from '@shopify/polaris'
-import useAppBridge from '../hooks/useAppBridge'
 import CustomLink from './CustomLink'
 import { useTranslation } from './TextProvider';
 
 
 const PolarisProvider = ({children}) => {
 
-  const {locale} = useAppBridge()
-  
   const currentTranslation = useTranslation() // this will update according to the locale from the i8 provider
 
   return (
