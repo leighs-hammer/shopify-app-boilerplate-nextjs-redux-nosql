@@ -41,7 +41,7 @@ const verifiyBillingHandler = async (req: NextApiRequest, res: NextApiResponse) 
   try {
     await client.connect()
     
-    const dbDoc = await findOneStoreDocumentById(client, shop)
+    const dbDoc = await findOneStoreDocumentById(client, `${shop}`)
     
     // checks for existence authenticity of pass through
     if(!dbDoc || dbDoc.callAuthenticityKey !== cak) {
@@ -64,7 +64,7 @@ const verifiyBillingHandler = async (req: NextApiRequest, res: NextApiResponse) 
 
     const specificBillingObjectApproved = shopifyCurrentAppBilling[0]
     const shapedBilling = dataShapeBillingVerify(specificBillingObjectApproved)
-    const updateDb = await updateField(client, shop, 'billing', shapedBilling)
+    const updateDb = await updateField(client, `${shop}`, 'billing', shapedBilling)
 
     if(updateDb) {
       res.writeHead(302, {

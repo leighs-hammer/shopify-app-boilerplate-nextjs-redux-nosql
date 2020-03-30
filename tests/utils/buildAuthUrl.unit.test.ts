@@ -7,6 +7,7 @@ test('should expect an auth url to be correct', () => {
 })
 
 test('should return false when no shop is passed in', () => {
+  // @ts-ignore
   const failedAuth = buildAuthUrl()
   expect(failedAuth).toBe('')
 })

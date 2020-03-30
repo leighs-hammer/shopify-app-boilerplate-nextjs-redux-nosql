@@ -33,6 +33,7 @@ test('a nested array value at an index should be found with the "getNestedKey" f
 
 test('a nested array should be found with the "getNestedKey" function', () => {
   const gotten = getNestedKey(['test','test','test','valueArray'], mockDictionary)
+  // @ts-ignore
   expect(gotten.length).toBe(2)
   expect(gotten[0]).toBe('string')
   expect(gotten[1]).toBe('string2')
@@ -57,6 +58,7 @@ test('safelyGetNestedText should nested array value using object notation', () =
 
 test('safelyGetNestedText should nested array using object notation', () => {
   const gotten = safelyGetNestedText('test.test.test.valueArray', mockDictionary)
+  // @ts-ignore
   expect(gotten.length).toBe(2)
   expect(gotten[0]).toBe('string')
   expect(gotten[1]).toBe('string2')

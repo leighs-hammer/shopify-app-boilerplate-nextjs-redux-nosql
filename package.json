@@ -12,8 +12,8 @@
     "test:ci": "node tools/tests",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:units": "jest *.unit.test.*",
-    "test:units:github-actions": "jest *.unit.test.*"
+    "test:units": "jest .*.unit.test.ts",
+    "test:units:github-actions": "jest .*.unit.test.ts"
   },
   "dependencies": {
     "@shopify/app-bridge": "^1.20.1",

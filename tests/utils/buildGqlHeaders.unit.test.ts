@@ -8,6 +8,7 @@ test('should return correct header token and types', () => {
 })
 
 test('should return false when no token is passed', () => {
+  // @ts-ignore
   const failedHeaders = buildHeaders()
   expect(failedHeaders).toBe(false)
 })
