@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import {Context} from '@shopify/app-bridge-react'
+import { Redirect } from '@shopify/app-bridge/actions';
 
 interface IFuseAppBridgeReturn {
   state?: any,
@@ -18,6 +19,17 @@ const useAppBridge = () => {
     setUserLocale(state.staffMember.locale)
   }
 
+  const redirect = appBridge ? Redirect.create(appBridge) : {dispatch: () => {}}
+
+  const redirectToRemote = (url) => {
+    if(appBridge ) {
+      redirect.dispatch(Redirect.Action.REMOTE, {
+        url: url,
+        newContext: true,
+      })
+    }
+  }
+
   useEffect(() => {
 
     if(appBridge) {
@@ -30,6 +42,7 @@ const useAppBridge = () => {
       appBridge,
       locale: userLocale,
       state,
+      redirectToRemote,
     }
   }
 

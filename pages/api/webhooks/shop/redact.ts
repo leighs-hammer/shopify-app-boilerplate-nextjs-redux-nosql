@@ -33,10 +33,13 @@ export default async (req, res) => {
   
   // All good continue and remove data
   const client = new MongoClient(process.env.MONGO_DB_CONNECTION_STRING, { useUnifiedTopology: true })
+
   try {
     // Connect to the MongoDB cluster
     await client.connect();
     // delete the doc
+
+    //... DO STUFF
 
     const result = await deleteDocumentById(client, shop_domain)
 

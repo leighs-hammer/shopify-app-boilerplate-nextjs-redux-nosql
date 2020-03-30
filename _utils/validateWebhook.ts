@@ -8,6 +8,7 @@ const validateWebhook: TvalidateWebhook = (req, hmac) => {
 
   const rawBody = createRawBody(req.body)
   const isWebhookValid = checkWebhookHmacValidity(process.env.SHOPIFY_APP_SECRET, rawBody, hmac)
+  
   return isWebhookValid
 
 }

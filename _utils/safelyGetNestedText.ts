@@ -6,7 +6,7 @@ export const getNestedKey: TgetNestedKey = (pathKeys, dictionary) => pathKeys.re
 const safelyGetNestedText: TsafelyGetNestedText = (textKey, dictionary) => {
 
   if(typeof textKey !== 'string') {
-    console.error(`safelyGetNestedText requires a string key using object notation to the location you would like to retrieve`)
+    console.error('safelyGetNestedText requires a string key using object notation to the location you would like to retrieve')
     return `Could lookup translation at ${textKey}`
   }
   

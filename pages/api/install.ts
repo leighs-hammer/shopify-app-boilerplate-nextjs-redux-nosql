@@ -9,12 +9,16 @@ export default async (req, res) => {
 
   // lockdown when in prod
   if(process.env.NODE_ENV === 'production') {
-    // same frontend only 
-    const secFetchSite = req.headers['sec-fetch-site']
+    // Add Token to all environments
+    
+    // const secFetchSite = req.headers['sec-fetch-site']
+    const host = req.headers['x-forwarded-host']
+    const cleanBaseOrigin = process.env.APP_URL.replace('https://', '')
+
 
     // early respond for malicious & wrong methods of requests
-    if(req.method !== 'POST' || secFetchSite !== 'same-origin') {
-      return res.status(400).json({error: true, message: 'Method not allowed'})
+    if(req.method !== 'POST' || host !== cleanBaseOrigin) {
+      return res.status(429).json({error: true, message: 'Method not allowed', secHeader: req.headers, validity: host === process.env.APP_URL })
     }
   }
 

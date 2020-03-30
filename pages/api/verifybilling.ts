@@ -6,6 +6,20 @@ import dataShapeBillingVerify from '../../_utils/dataShapers/dataShapeBillingVer
 export default async (req, res) => {
 
 
+  // lockdown when in prod
+  if(process.env.NODE_ENV === 'production') {
+    // Add Token to all environments
+    
+    // const secFetchSite = req.headers['sec-fetch-site']
+    const host = req.headers['x-forwarded-host']
+    const cleanBaseOrigin = process.env.APP_URL.replace('https://', '')
+
+
+    // early respond for malicious & wrong methods of requests
+    if(req.method !== 'POST' || host !== cleanBaseOrigin) {
+      return res.status(429).json({error: true, message: 'Method not allowed', secHeader: req.headers, validity: host === process.env.APP_URL })
+    }
+  }
 
   // no body sent
   if(!req.query) {
