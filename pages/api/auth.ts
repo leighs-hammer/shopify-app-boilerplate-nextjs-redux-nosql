@@ -1,6 +1,7 @@
 import {checkHmacValidity} from 'shopify-hmac-validation'
+import verifiedConnection from '../../_middleware/verifiedConnection';
 
-export default async (req, res) => {
+const authHandler =  async (req, res) => {
  
   if(!req.body.query.shop || !req.body.state) {
     console.error('Missing query data', req.body);
@@ -22,5 +23,8 @@ export default async (req, res) => {
     body: req.body,
     hmacValid: shopifyValidity,
     redirectTo: redirectTo
-  });
+  })
 }
+
+
+export default verifiedConnection(authHandler)
