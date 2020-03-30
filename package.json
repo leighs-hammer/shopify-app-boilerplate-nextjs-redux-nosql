@@ -12,12 +12,12 @@
     "test:ci": "node tools/tests",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:units": "jest *.unit.test.*",
-    "test:units:github-actions": "jest *.unit.test.*"
+    "test:units": "jest .*.unit.test.ts",
+    "test:units:github-actions": "jest .*.unit.test.ts"
   },
   "dependencies": {
-    "@shopify/app-bridge": "^1.20.0",
-    "@shopify/app-bridge-react": "^1.20.0",
+    "@shopify/app-bridge": "^1.20.1",
+    "@shopify/app-bridge-react": "^1.20.1",
     "@shopify/polaris": "^4.16.1",
     "@shopify/react-i18n": "^2.4.0",
     "@types/mongodb": "^3.5.4",
@@ -37,24 +37,24 @@
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
-    "shopify-hmac-validation": "^0.1.7",
+    "shopify-hmac-validation": "^1.0.4",
     "uuid": "^7.0.2"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-typescript": "^7.9.0",
     "@types/jest": "^25.1.4",
-    "@types/node": "^13.9.3",
-    "@types/react": "^16.9.25",
+    "@types/node": "^13.9.6",
+    "@types/react": "^16.9.27",
     "babel-eslint": "^10.1.0",
     "cross-env": "^5.2.0",
     "eslint": "^6.8.0",
     "eslint-plugin-jest": "^23.8.2",
     "eslint-plugin-react": "^7.19.0",
     "husky": "^4.2.3",
-    "jest": "^25.1.0",
+    "jest": "^25.2.4",
     "ngrok": "^3.2.7",
-    "ts-jest": "^25.2.1",
+    "ts-jest": "^25.3.0",
     "typescript": "^3.8.3"
   },
   "husky": {

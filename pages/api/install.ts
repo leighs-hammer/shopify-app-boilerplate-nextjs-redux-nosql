@@ -1,23 +1,13 @@
 import {MongoClient} from 'mongodb'
 import shopifyMethods from '../../_utils/shopifyMethods'
-import { listDatabases, createStoreDocument, findOneStoreDocumentById } from '../../_utils/atlasMethods';
+import { listDatabases, createStoreDocument, findOneStoreDocumentById, createDBClient } from '../../_utils/atlasMethods';
 
 import installInitialDataMongo from '../../_config/installInitialDataMongo';
+import { NextApiRequest, NextApiResponse } from 'next';
+import verifiedConnection from '../../_middleware/verifiedConnection';
 
 // Installs or returns the core shop data
-export default async (req, res) => {
-
-  // lockdown when in prod
-  if(process.env.NODE_ENV === 'production') {
-    // same frontend only 
-    const secFetchSite = req.headers['sec-fetch-site']
-
-    // early respond for malicious & wrong methods of requests
-    if(req.method !== 'POST' || secFetchSite !== 'same-origin') {
-      return res.status(400).json({error: true, message: 'Method not allowed'})
-    }
-  }
-
+const InstallHandler =  async (req: NextApiRequest, res: NextApiResponse) => {
 
   // required params
   const {shop, code} = req.body
@@ -29,7 +19,7 @@ export default async (req, res) => {
 
 
 
-  const client = new MongoClient(process.env.MONGO_DB_CONNECTION_STRING, { useUnifiedTopology: true })
+  const client = createDBClient()
   
   // Connect
   try {
@@ -96,3 +86,5 @@ export default async (req, res) => {
   }
 
 }
+
+export default verifiedConnection(InstallHandler)

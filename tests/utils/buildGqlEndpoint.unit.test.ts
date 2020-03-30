@@ -12,6 +12,7 @@ test('Should build the correct enpoint with a version', () => {
 })
 
 test('Should return false when no shop is passed', () => {
+  // @ts-ignore
   const failedEndpoint = buildGqlEndpoint()
   expect(failedEndpoint).toBe('')
 })

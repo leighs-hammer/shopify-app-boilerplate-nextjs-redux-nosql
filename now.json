@@ -14,7 +14,8 @@
     {
       "src": "/.*",
       "headers": { 
-        "Content-Security-Policy": "frame-ancestors https://*.myshopify.com" 
+        "Content-Security-Policy": "frame-ancestors https://*.shopify.com https://*.myshopify.com self",
+        "Content-Security-Policy": "frame-src https://*.shopify.com https://*.myshopify.com self"
       },
       "continue": true
     }
