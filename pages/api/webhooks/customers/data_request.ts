@@ -1,6 +1,8 @@
 import {checkWebhookHmacValidity, createRawBody} from 'shopify-hmac-validation'
+import validateWebhook from '../../../../_utils/validateWebhook'
+import { NextApiRequest, NextApiResponse } from 'next'
 
-export default async (req, res) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   if(req.method !== 'POST'){
     return res.status(429).json({
@@ -8,9 +10,8 @@ export default async (req, res) => {
     })
   }
 
-  const rawBody = createRawBody(req.body)
 
-  const hmac = req.headers['x-shopify-hmac-sha256']
+  const hmac: string | string[] = req.headers['x-shopify-hmac-sha256']
   const shop = req.headers['x-shopify-shop-domain']
 
   if(!shop || !hmac) {
@@ -19,9 +20,8 @@ export default async (req, res) => {
     })
   }
 
-  const isWebhookValid = checkWebhookHmacValidity(process.env.SHOPIFY_APP_SECRET, rawBody, hmac)
 
-  if(isWebhookValid) {
+  if(validateWebhook(req, hmac)) {
     console.log('webhook Valid')
     // If you handle customer data, remoember to handle its deletion here. 
     // the boilerplate does not so responding. 
@@ -37,7 +37,7 @@ export default async (req, res) => {
 
   } else {
     
-    console.error({error: true, req: {headers: req.headers, body: req.body, rawBody, shop }})
+    console.error({error: true, req: {headers: req.headers, body: req.body, shop }})
     // custom logging if you so choose
     return res.status(429).json({
       body: 'Request is not validated by HMAC'

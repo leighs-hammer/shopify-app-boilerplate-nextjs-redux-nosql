@@ -1,6 +1,6 @@
 import { deleteDocumentById } from '../../../../_utils/atlasMethods'
 import { MongoClient } from 'mongodb'
-import {checkWebhookHmacValidity, createRawBody} from 'shopify-hmac-validation'
+import validateWebhook from '../../../../_utils/validateWebhook'
 
 export default async (req, res) => {
 
@@ -21,13 +21,10 @@ export default async (req, res) => {
       body: 'Request could not be completed'
     })
   }
-  
-  ///customers/data_request
-  const rawBody = createRawBody(req.body)
-  const isWebhookValid = checkWebhookHmacValidity(process.env.SHOPIFY_APP_SECRET, rawBody, hmac)
 
-  if(!isWebhookValid) {
-    console.error({error: true, req: {headers: req.headers, body: req.body, rawBody, shop }})
+
+  if(!validateWebhook(req, hmac)) {
+    console.error({error: true, req: {headers: req.headers, body: req.body,  shop }})
     // custom logging if you so choose
     return res.status(429).json({
       body: 'Request is not validated by HMAC'
