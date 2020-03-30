@@ -1,7 +1,6 @@
-import checkHmacValidity from 'shopify-hmac-validation'
+import {checkHmacValidity} from 'shopify-hmac-validation'
 
 export default async (req, res) => {
-  console.log('Auth started');
  
   if(!req.body.query.shop || !req.body.state) {
     console.error('Missing query data', req.body);
@@ -10,7 +9,6 @@ export default async (req, res) => {
   
   const shopifyValidity = checkHmacValidity(process.env.SHOPIFY_APP_SECRET, req.body.query)
 
-  console.log(req.body.query)
   if(!shopifyValidity) {
     console.error('Is HMAC is not valid', req.body.query.shop);
     return res.status(429).json({message:'Unauthorized: Invalid entrance detected'})

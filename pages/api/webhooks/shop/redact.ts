@@ -1,10 +1,40 @@
-import { deleteDocumentById } from '../../../../_utils/atlasMethods';
-import { MongoClient } from 'mongodb';
+import { deleteDocumentById } from '../../../../_utils/atlasMethods'
+import { MongoClient } from 'mongodb'
+import {checkWebhookHmacValidity, createRawBody} from 'shopify-hmac-validation'
 
 export default async (req, res) => {
 
+  if(req.method !== 'POST'){
+    return res.status(429).json({
+      body: 'Unauthorized access'
+    })
+  }
+
+  // headers
+  const hmac = req.headers['x-shopify-hmac-sha256']
+  const shop = req.headers['x-shopify-shop-domain']
+  
   const {shop_domain} = req.body
   
+  if(!shop || !hmac || shop_domain !== shop) {
+    return res.status(429).json({
+      body: 'Request could not be completed'
+    })
+  }
+  
+  ///customers/data_request
+  const rawBody = createRawBody(req.body)
+  const isWebhookValid = checkWebhookHmacValidity(process.env.SHOPIFY_APP_SECRET, rawBody, hmac)
+
+  if(!isWebhookValid) {
+    console.error({error: true, req: {headers: req.headers, body: req.body, rawBody, shop }})
+    // custom logging if you so choose
+    return res.status(429).json({
+      body: 'Request is not validated by HMAC'
+    })
+  }
+  
+  // All good continue and remove data
   const client = new MongoClient(process.env.MONGO_DB_CONNECTION_STRING, { useUnifiedTopology: true })
   try {
     // Connect to the MongoDB cluster
