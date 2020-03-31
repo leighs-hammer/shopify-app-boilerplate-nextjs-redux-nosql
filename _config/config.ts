@@ -18,7 +18,7 @@ const appConfig: IFappConfig = {
   dbRoot: 'stores',
 
   // Billing
-  forceDevelopment: true,
+  forceDevelopment: false,
 }
 
 export default appConfig
