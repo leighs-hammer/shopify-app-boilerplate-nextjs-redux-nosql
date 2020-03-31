@@ -1,4 +1,4 @@
-import { deleteDocumentById } from '../../../../_utils/atlasMethods'
+import { deleteDocumentById, createDBClient } from '../../../../_utils/atlasMethods'
 import { MongoClient } from 'mongodb'
 import validateWebhook from '../../../../_utils/validateWebhook'
 
@@ -32,7 +32,7 @@ export default async (req, res) => {
   }
   
   // All good continue and remove data
-  const client = new MongoClient(process.env.MONGO_DB_CONNECTION_STRING, { useUnifiedTopology: true })
+  const client = createDBClient()
 
   try {
     // Connect to the MongoDB cluster
