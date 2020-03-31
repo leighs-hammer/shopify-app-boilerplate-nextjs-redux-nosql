@@ -34,7 +34,7 @@ https://github.com/leighs-hammer/shopify-app-boilerplate-nextjs-redux-nosql/wiki
 7. test the app on a dev store, you should see a loading screen and then an empty dashboard. 
 
 ## Multiple environments & deployment via now.sh
-I run development and production apps along side each other, this means locally my environment variables are used for my dev app. For a production deployment, you will need environmaent variables added to your now.sh account. 
+I run development and production apps along side each other, this means locally my environment variables are used for my dev app. For a production deployment, you will need environment variables added to your now.sh account. 
 
 `now secrets add APP_URL_NAME value` note that env vars in now are global so you will have a specific name along side them to stop conflicting. you will need these specific to every deployed app. by default it will rename the uppercase to lowercase keys. for example `APP_URL_BOILERPLATE` will become `app_url_boilerplate` load these into the `./now.json` file this will now surface that secret on `process.env.APP_URL` in the app.
 
