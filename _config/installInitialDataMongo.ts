@@ -17,7 +17,8 @@ const installInitialDataMongo = (shop, token) => {
       status: 'init'
     },
     billingUsage: [],
-
+    usersActive: false,
+    users: [],
   }
 }
 

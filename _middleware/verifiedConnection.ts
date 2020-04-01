@@ -14,13 +14,12 @@ const verifiedConnection: TverificationMiddleware = (handler: Thandler) => {
 
     if(process.env.NODE_ENV === 'production') {
       
-      const secFetchSite = req.headers['sec-fetch-site']
       const host = req.headers['x-forwarded-host']
       const cleanBaseOrigin = process.env.APP_URL.replace('https://', '')
  
       // early respond for malicious & wrong methods of requests
-      if(req.method !== 'POST' || host !== cleanBaseOrigin || secFetchSite !== 'same-origin') {
-        return res.status(429).json({error: true, message: 'Method not allowed or security check failed', debug: {secFetchSite, host, cleanBaseOrigin }})
+      if(req.method !== 'POST' || host !== cleanBaseOrigin) {
+        return res.status(429).json({error: true, message: 'Method not allowed or security check failed'})
       }
     }
 

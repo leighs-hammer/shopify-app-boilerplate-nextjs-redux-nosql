@@ -33,3 +33,4 @@ service-account.json
 
 ##
 /_config/firebaseConfig.ts
+.now
