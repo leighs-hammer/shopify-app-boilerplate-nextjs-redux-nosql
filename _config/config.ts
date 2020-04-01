@@ -1,4 +1,3 @@
-import { truncate } from "fs"
 
 type dbValues = 'atlas'
 

@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from "next"
+import { NextApiRequest, NextApiResponse } from 'next'
 import { createRawBody, checkWebhookHmacValidity } from 'shopify-hmac-validation'
 import { TverificationMiddleware, Thandler } from '../_types/verifiedConnections';
 
