@@ -32,7 +32,11 @@ const InstallHandler =  async (req: NextApiRequest, res: NextApiResponse) => {
     if(storeDocument) {
       // store exists return early
       return res.status(200).json({
-        body: {callAuthenticityKey : storeDocument.callAuthenticityKey, billing: storeDocument.billing},
+        body: {
+          callAuthenticityKey : storeDocument.callAuthenticityKey, 
+          billing: storeDocument.billing,
+          billingCheckRequired: true,
+        },
       })
 
     } 

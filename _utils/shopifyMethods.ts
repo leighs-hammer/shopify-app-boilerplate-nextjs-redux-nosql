@@ -17,6 +17,19 @@ export const exchangeToken = async (shop, payload) => {
   }
 }
 
+// Get user token
+export const exchangeUserToken = async (shop, payload) => {
+  try {
+    const requestData = await Axios.post(buildAuthUrl(shop), payload)
+
+    if(!requestData.data.access_token) {return false}
+    
+    return requestData.data
+  } catch {
+    return false
+  }
+}
+
 // retrieving billing
 export const getCurrentAppBilling = async (shop, token) => {
   const headers = buildHeaders(token)
@@ -42,7 +55,8 @@ export const getCurrentAppBilling = async (shop, token) => {
 
 const shopifyMethods = {
   exchangeToken,
-  getCurrentAppBilling
+  exchangeUserToken,
+  getCurrentAppBilling,
 }
 
 export default shopifyMethods

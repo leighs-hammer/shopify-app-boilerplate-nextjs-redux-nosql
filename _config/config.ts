@@ -6,6 +6,8 @@ interface IFappConfig {
   dbName: string,
   dbRoot: string,
 
+  dualAuth: boolean,
+
   forceDevelopment: boolean,
 }
 
@@ -17,8 +19,11 @@ const appConfig: IFappConfig = {
   dbName: process.env.APP_NAME_KEY,
   dbRoot: 'stores',
 
+  //Users
+  dualAuth: true, // enables the dual bump auto for offline & online modes
+
   // Billing
-  forceDevelopment: true,
+  forceDevelopment: false,
 }
 
 export default appConfig

@@ -1,6 +1,5 @@
-import { createRawBody } from 'shopify-hmac-validation';
-import checkWebhookHmacValidity from 'shopify-hmac-validation';
-import { NextApiRequest } from 'next';
+import { createRawBody, checkWebhookHmacValidity } from 'shopify-hmac-validation'
+import { NextApiRequest } from 'next'
 
 type TvalidateWebhook = (req: NextApiRequest, hmac: string | string[]) => boolean
 
