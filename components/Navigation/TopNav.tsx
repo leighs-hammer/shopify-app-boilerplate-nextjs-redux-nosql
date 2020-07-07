@@ -3,10 +3,10 @@ import { Tabs } from '@shopify/polaris';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
-type TNavType =  string
+type TNavType = string
 
 interface IFRQuery {
-    type?: string
+  type?: string
 }
 
 interface IFcurrentPath {
@@ -14,9 +14,16 @@ interface IFcurrentPath {
   href?: string,
 }
 
+interface EnumTabItem {
+  id: string,
+  content: string,
+  accessibilityLabel: string,
+  url: string,
+}
 
-// @todo add interface
-const tabs = [
+interface EnumTabItems extends Array<EnumTabItem> { }
+
+const tabs: EnumTabItems = [
   {
     id: 'dashboard',
     content: 'Dashboard',
@@ -45,23 +52,22 @@ const TopNav = () => {
 
   const router = useRouter()
   const currentPath: IFcurrentPath = useSelector(state => state.app.currentPath)
- 
+
   const query: IFRQuery = router.query
   const navType: TNavType = query.type ? query.type : ''
-
 
   // Sync the index
   useEffect(() => {
 
-    if(currentPath && currentPath.path) {
+    if (currentPath && currentPath.path) {
       const indexOfTab = tabs.findIndex(item => item.url.includes(currentPath.path))
-      if(indexOfTab !== -1 && selected !== indexOfTab) {
+      if (indexOfTab !== -1 && selected !== indexOfTab) {
         setSelected(indexOfTab)
       }
-      
-      if(indexOfTab === -1 && navType) {
+
+      if (indexOfTab === -1 && navType) {
         const typedTab = tabs.findIndex(item => item.url.includes(navType))
-        if(typedTab !== -1) {
+        if (typedTab !== -1) {
           setSelected(typedTab)
         }
       }
@@ -71,7 +77,7 @@ const TopNav = () => {
   }, [currentPath, currentPath])
 
 
-  if(!tabs || tabs.length === 0) {
+  if (!tabs || tabs.length === 0) {
     return null
   }
 
