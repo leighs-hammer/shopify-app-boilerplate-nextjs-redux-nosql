@@ -23,7 +23,6 @@ interface EnumTabItem {
 
 interface EnumTabItems extends Array<EnumTabItem> { }
 
-// @todo add interface
 const tabs: EnumTabItems = [
   {
     id: 'dashboard',
