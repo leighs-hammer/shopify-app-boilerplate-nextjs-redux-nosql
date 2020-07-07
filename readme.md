@@ -25,7 +25,7 @@ https://github.com/leighs-hammer/shopify-app-boilerplate-nextjs-redux-nosql/wiki
 
 ## Setup
 1. create an app in your partners.shopify.com dashboard (optionally create a production app as well)
-2. copy the `.env.sample` and create a local `.env` add your development app details and ngrok
+2. copy the `.env.sample` and create a local `.env` add your development app details and ngrok <br />
 2.1 revise the `/_config/config.ts` specifying the database / root you would like. 
 3. open two terminals & start up ngrok `npm run ngrok` in one
 4. copy the https://XXX.ngrok address and load it into the shopify dashboard
